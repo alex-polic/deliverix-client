@@ -1,3 +1,5 @@
+@import "src/styles/index";
+
 html,
 body {
   margin: 0;
@@ -8,13 +10,19 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+html {
+  background: $background-green;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
-#root{
+#root {
   height: 100%;
 }
 
-@import "src/styles/index";
+h1 {
+  color: $dark-blue;
+}

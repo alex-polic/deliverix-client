@@ -4,11 +4,7 @@ import {Copyright, Instagram, LinkedIn} from "@mui/icons-material";
 export function Footer() {
     return(
         <footer className={"footer"}>
-            <Box className={"footer-container"} sx={{
-                height: 40,
-                backgroundColor: 'info.main'
-            }}
-            >
+            <div className={"footer-container"}>
                 <Box className={"copyright-info"}>
                     <Copyright/>
                     <span>Aleksandar Polic</span>
@@ -20,7 +16,7 @@ export function Footer() {
                     <Link href={"https://www.instagram.com"}><Instagram/></Link>
                 </Box>
 
-            </Box>
+            </div>
         </footer>
     );
 }
