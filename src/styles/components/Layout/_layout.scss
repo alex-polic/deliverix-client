@@ -1,0 +1,30 @@
+.page-content{
+  margin: 50px 20px;
+  height: 100%;
+}
+
+.footer{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+
+  color: white;
+  a{
+    margin: 0 5px;
+    color: white;
+  }
+  .footer-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+
+  .copyright-info {
+    margin: auto;
+    display: flex;
+    align-items: center;
+    span {
+      margin-left: 8px;
+    }
+  }
+}
