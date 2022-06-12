@@ -1,5 +1,5 @@
 import {Box, Link} from "@mui/material";
-import {Copyright, Instagram, LinkedIn} from "@mui/icons-material";
+import {Copyright, GitHub, LinkedIn} from "@mui/icons-material";
 
 export function Footer() {
     return(
@@ -13,7 +13,7 @@ export function Footer() {
                 <Box className={"copyright-info"}>
                     <span>Links:</span>
                     <Link href={"https://www.linkedin.com"}><LinkedIn/></Link>
-                    <Link href={"https://www.instagram.com"}><Instagram/></Link>
+                    <Link href={"https://www.github.com"}><GitHub/></Link>
                 </Box>
 
             </div>
