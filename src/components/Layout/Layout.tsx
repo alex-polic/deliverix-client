@@ -1,12 +1,16 @@
-import React from "react";
 import {Header} from "./Header";
 import {Footer} from "./Footer";
 
-export function Layout(props : React.PropsWithChildren) {
+interface ILayoutProps {
+    title?: string,
+    children?: any
+}
+
+export function Layout({title = "Deliverix", children}: ILayoutProps) {
     return(
         <>
-            <Header />
-             <main className={"page-content"}>{ props.children }</main>
+            <Header title={title}/>
+             <div className={"page-content"}>{ children }</div>
             <Footer />
         </>
     );

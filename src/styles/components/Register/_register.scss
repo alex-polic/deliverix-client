@@ -1,0 +1,14 @@
+.register-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .register-input {
+    width: 300px;
+    margin: 10px;
+  }
+  hr {
+    width: 320px;
+  }
+}

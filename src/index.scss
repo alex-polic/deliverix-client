@@ -20,7 +20,9 @@ code {
 }
 
 #root {
-  height: 100%;
+  position: relative;
+  overflow-y: auto;
+  //height: 100vh;
 }
 
 h1 {
