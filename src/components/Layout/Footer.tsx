@@ -12,8 +12,8 @@ export function Footer() {
 
                 <Box className={"copyright-info"}>
                     <span>Links:</span>
-                    <Link href={"https://www.linkedin.com"}><LinkedIn/></Link>
-                    <Link href={"https://www.github.com"}><GitHub/></Link>
+                    <Link href={"https://www.linkedin.com/in/aleksandar-polic8/"}><LinkedIn/></Link>
+                    <Link href={"https://github.com/alex-polic"}><GitHub/></Link>
                 </Box>
 
             </div>
