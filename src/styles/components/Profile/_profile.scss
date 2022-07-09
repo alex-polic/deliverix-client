@@ -1,0 +1,15 @@
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+
+  .register-input {
+    width: 300px;
+    margin: 10px;
+  }
+
+  .update-button {
+    margin: 10px;
+  }
+}

@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { RootState } from '../../store/store'
 
 // Define a type for the slice state
 interface LoginState {
@@ -16,6 +15,7 @@ interface RegisterState {
 interface AuthInitialState {
     login: LoginState,
     register: RegisterState,
+    isLoggedIn: boolean
 }
 
 // Define the initial state using that type
@@ -27,7 +27,8 @@ const initialState: AuthInitialState = {
     register: {
         email: "",
         password: ""
-    }
+    },
+    isLoggedIn: !!localStorage.getItem("token"),
 }
 
 export const authSlice = createSlice({

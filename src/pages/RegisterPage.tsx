@@ -1,8 +1,40 @@
 import {Layout} from "../components/Layout";
 import {Button, TextField, ToggleButton, ToggleButtonGroup} from "@mui/material";
-import {Image} from "@mui/icons-material";
+import {Check, Image} from "@mui/icons-material";
+import {useState} from "react";
+import {DateTime} from "luxon";
+
+import * as authService from "../services/authService";
 
 export function RegisterPage(){
+    const [profilePicture, setProfilePicture] = useState<File>();
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [fullName, setFullName] = useState("");
+    const [passwordConfirmation, setPasswordConfirmation] = useState("");
+    const [address, setAddress] = useState("");
+    const [dateOfBirth, setDateOfBrith] = useState(DateTime.now());
+    const [userType, setUserType] = useState("0");
+
+    const registerUser = async () => {
+        const formData = new FormData();
+        formData.append("username", username);
+        formData.append("email", email);
+        formData.append("password", password);
+        formData.append("fullName", fullName);
+        formData.append("passwordConfirmation", passwordConfirmation);
+        formData.append("address", address);
+        formData.append("dateOfBirth", dateOfBirth.toFormat("yyyy-MM-dd"));
+        formData.append("userType", userType);
+
+        if(profilePicture)
+            formData.append("profilePicture", profilePicture as File);
+
+        await authService.register(formData);
+    }
+
+    // @ts-ignore
     return(
         <Layout title={"Register"}>
             <div className={"register-container"}>
@@ -11,19 +43,22 @@ export function RegisterPage(){
                     component="label"
                     sx={{ borderRadius: "50%", width: "100px", height: "100px" }}
                 >
-                    <Image />
+                    {profilePicture && <Check />}
+                    {!profilePicture && <Image />}
+
                     <input
                         type="file"
+                        onChange={(e) => setProfilePicture(e.target.files![0])}
                         hidden
                     />
                 </Button>
-                <TextField className={"register-input"} label="Username" />
-                <TextField className={"register-input"} label="Email" />
-                <TextField className={"register-input"} label="Password"/>
-                <TextField className={"register-input"} label="Confirm Password"/>
+                <TextField className={"register-input"} label="Username" onChange={(e) => setUsername(e.target.value)} />
+                <TextField className={"register-input"} label="Email" onChange={(e) => setEmail(e.target.value)}/>
+                <TextField className={"register-input"} label="Password" onChange={(e) => setPassword(e.target.value)}/>
+                <TextField className={"register-input"} label="Confirm Password" onChange={(e) => setPasswordConfirmation(e.target.value)}/>
                 <hr/>
-                <TextField className={"register-input"} label="Full Name"/>
-                <TextField className={"register-input"} label="Address"/>
+                <TextField className={"register-input"} label="Full Name" onChange={(e) => setFullName(e.target.value)}/>
+                <TextField className={"register-input"} label="Address" onChange={(e) => setAddress(e.target.value)}/>
                 <TextField
                     className={"register-input"}
                     id="date"
@@ -34,31 +69,36 @@ export function RegisterPage(){
                     InputLabelProps={{
                         shrink: true,
                     }}
+                    onChange={(e) => setDateOfBrith(DateTime.fromFormat(e.target.value, "yyyy-MM-dd"))}
                 />
                 <ToggleButtonGroup
                     orientation="horizontal"
-                    value="admin"
+                    value={userType}
+                    onChange={(e, value) => setUserType(value)}
                     exclusive
                 >
-                <ToggleButton
-                    value="user"
-                >
-                    User
-                </ToggleButton>
-                <ToggleButton
-                    value="courier"
-                >
-                    Courier
-                </ToggleButton>
-                <ToggleButton
-                    value="admin"
-                >
-                    Admin
-                </ToggleButton>
+                    <ToggleButton
+                        value="0"
+                    >
+                        User
+                    </ToggleButton>
+                    <ToggleButton
+                        value="1"
+                    >
+                        Courier
+                    </ToggleButton>
+                    <ToggleButton
+                        value="2"
+                    >
+                        Admin
+                    </ToggleButton>
                 </ToggleButtonGroup>
 
 
-                <Button variant="contained" href={"/register"}>Sign up</Button>
+                <Button
+                    variant="contained"
+                    onClick={registerUser}
+                >Sign up</Button>
             </div>
         </Layout>
     );

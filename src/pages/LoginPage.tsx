@@ -3,14 +3,18 @@ import {Button, TextField} from "@mui/material";
 import {useState} from "react";
 
 import * as authService from "../services/authService";
+import {useNavigate} from "react-router-dom";
 
 export function LoginPage(){
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    const navigate = useNavigate();
+
     const loginUser = async () => {
         await authService.login(email, password);
+        navigate('/dashboard');
     }
 
     return(
