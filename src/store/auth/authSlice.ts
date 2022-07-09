@@ -1,5 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
+import type {PayloadAction} from '@reduxjs/toolkit'
+import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
+import * as apiClient from "../../clients/apiClient";
 
 // Define a type for the slice state
 interface LoginState {
@@ -12,9 +13,20 @@ interface RegisterState {
     password: string,
 }
 
+interface UpdateUserState {
+    email: string,
+    password: string,
+    passwordConfirmation: string,
+    username: string,
+    fullName: string,
+    address: string,
+    dateOfBirth: string
+}
+
 interface AuthInitialState {
     login: LoginState,
     register: RegisterState,
+    updateUser: UpdateUserState,
     isLoggedIn: boolean
 }
 
@@ -23,6 +35,15 @@ const initialState: AuthInitialState = {
     login: {
         email: "",
         password: ""
+    },
+    updateUser: {
+        email: "",
+        password: "",
+        passwordConfirmation: "",
+        username: "",
+        fullName: "",
+        address: "",
+        dateOfBirth: ""
     },
     register: {
         email: "",
@@ -45,8 +66,25 @@ export const authSlice = createSlice({
             state.login.password = action.payload;
         },
     },
+    extraReducers: builder =>  {
+        builder.addCase(fetchUserForUpdate.fulfilled, (state, action) => {
+            console.log(action.payload);
+            state.updateUser = {
+                ...action.payload,
+                passwordConfirmation: "",
+            };
+        })
+    }
 })
 
+export const fetchUserForUpdate = createAsyncThunk(
+    "",
+    async (id: number) => {
+        return await apiClient.getUserById(id);
+    });
+
 export const { setLoginEmail, setLoginPassword } = authSlice.actions
+
+export const userForUpdate = (state: { auth: AuthInitialState }) => state.auth.updateUser;
 
 export default authSlice.reducer

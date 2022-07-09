@@ -1,65 +1,59 @@
 import {Layout} from "../components/Layout";
 import {Button, TextField} from "@mui/material";
 import {DateTime} from "luxon";
-import {useState} from "react";
+import {useEffect} from "react";
+import {useAppDispatch, useAppSelector} from "../store/hooks";
+import {fetchUserForUpdate, userForUpdate} from "../store/auth/authSlice";
 
 export function Profile(){
 
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [fullName, setFullName] = useState("");
-    const [passwordConfirmation, setPasswordConfirmation] = useState("");
-    const [address, setAddress] = useState("");
-    const [dateOfBirth, setDateOfBrith] = useState(DateTime.now());
+    const dispatch = useAppDispatch();
+    const user = useAppSelector(userForUpdate)
 
+    useEffect(() => {
+        dispatch(fetchUserForUpdate(16))
+    }, [dispatch])
+
+    console.log(DateTime.fromISO(user.dateOfBirth))
     return(
         <Layout title={"Profile"}>
             <h1>Your Deliverix profile</h1>
             <h2>View or edit your personal data.</h2>
             <div className={"profile-container"}>
                 <TextField
-                    value={username}
+                    value={user.username}
                     className={"register-input"}
-                    label="Username"
-                    onChange={(e) => setUsername(e.target.value)} />
+                    label="Username" />
                 <TextField
-                    value={email}
+                    value={user.email}
                     className={"register-input"}
-                    label="Email"
-                    onChange={(e) => setEmail(e.target.value)}/>
+                    label="Email" />
                 <TextField
-                    value={password}
+                    value={""}
                     className={"register-input"}
-                    label="Password"
-                    onChange={(e) => setPassword(e.target.value)}/>
+                    label="Password"/>
                 <TextField
-                    value={passwordConfirmation}
+                    value={""}
                     className={"register-input"}
-                    label="Confirm Password"
-                    onChange={(e) => setPasswordConfirmation(e.target.value)}/>
+                    label="Confirm Password"/>
                 <TextField
-                    value={fullName}
+                    value={user.fullName}
                     className={"register-input"}
-                    label="Full Name"
-                    onChange={(e) => setFullName(e.target.value)}/>
+                    label="Full Name"/>
                 <TextField
-                    value={address}
+                    value={user.address}
                     className={"register-input"}
-                    label="Address"
-                    onChange={(e) => setAddress(e.target.value)}/>
+                    label="Address"/>
                 <TextField
-                    value={dateOfBirth.toFormat("yyyy-MM-dd")}
+                    value={DateTime.fromISO(user.dateOfBirth).toFormat("yyyy-MM-dd")}
                     className={"register-input"}
                     id="date"
                     label="Birthday"
                     type="date"
-                    defaultValue="2000-01-01"
                     sx={{ width: 220 }}
                     InputLabelProps={{
                         shrink: true,
                     }}
-                    onChange={(e) => setDateOfBrith(DateTime.fromFormat(e.target.value, "yyyy-MM-dd"))}
                 />
 
                 <Button
