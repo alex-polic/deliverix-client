@@ -1,0 +1,25 @@
+.pagecard-container {
+  display: flex;
+  flex-direction: row;
+  margin: 10px 5px;
+
+  .pagecard-upper-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: start;
+    height: 50%;
+
+    svg {
+      font-size: 100px;
+    }
+  }
+
+  .pagecard-lower-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: end;
+    height: 50%;
+  }
+}

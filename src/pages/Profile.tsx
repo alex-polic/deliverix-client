@@ -31,6 +31,7 @@ export function Profile(){
         }
         dispatch(fetchCurrentUser());
     }, [currentUserData])
+
     return(
         <Layout title={"Profile"}>
             <h1>Your Deliverix profile</h1>

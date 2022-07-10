@@ -1,10 +1,93 @@
 import {Layout} from "../components/Layout";
+import {PageCard} from "../components/PageCard";
+import {
+    AccountBox,
+    AssignmentLate,
+    AssignmentTurnedIn,
+    Attachment,
+    Receipt,
+    ReceiptLong
+} from "@mui/icons-material";
+import {useAppDispatch, useAppSelector} from "../store/hooks";
+import {
+    currentUserSelector,
+    fetchCurrentUser
+} from "../store/auth/authSlice";
+import {useEffect} from "react";
+import UserType from "../dtos/enums/userType";
 
 export function Dashboard(){
+    const dispatch = useAppDispatch();
+    const currentUserData = useAppSelector(currentUserSelector);
+
+    useEffect(() => {
+        if(currentUserData.id == 0)
+            dispatch(fetchCurrentUser());
+    }, [currentUserData])
+
     return(
         <Layout>
             <h1>Welcome to Deliverix!</h1>
             <h2>Deliverix is your go-to delivery service.</h2>
+            <div className={"dashboard-container"}>
+                <PageCard
+                    href={"/profile"}
+                    pageTitle={"Profile"}
+                    pageIcon={<AccountBox />}
+                />
+                {currentUserData.role === UserType.Admin &&
+                    <>
+                        <PageCard
+                            href={"/admin/verifications"}
+                            pageTitle={"Verifications"}
+                            pageIcon={<Attachment />}
+                        />
+
+                        <PageCard
+                        href={"/admin/orders"}
+                        pageTitle={"All Orders"}
+                        pageIcon={<ReceiptLong />}
+                        />
+                    </>
+                }
+                {currentUserData.role === UserType.Buyer &&
+                    <>
+                        <PageCard
+                            href={"/buyer/order"}
+                            pageTitle={"New/View Order"}
+                            pageIcon={<Receipt />}
+                        />
+
+                        <PageCard
+                            href={"/buyer/pastOrders"}
+                            pageTitle={"Past Orders"}
+                            pageIcon={<AssignmentTurnedIn />}
+                        />
+                    </>
+                }
+                {currentUserData.role === UserType.Courier &&
+                    <>
+                        <PageCard
+                            href={"/courier/newOrder"}
+                            pageTitle={"New Orders"}
+                            pageIcon={<AssignmentLate />}
+                        />
+
+                        <PageCard
+                            href={"/courier/myOrders"}
+                            pageTitle={"My Orders"}
+                            pageIcon={<AssignmentTurnedIn />}
+                        />
+
+                        <PageCard
+                            href={"/courier/currentOrder"}
+                            pageTitle={"Current Order"}
+                            pageIcon={<Receipt />}
+                        />
+                    </>
+                }
+
+            </div>
         </Layout>
     );
 }

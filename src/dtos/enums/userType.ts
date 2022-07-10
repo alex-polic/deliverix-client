@@ -1,7 +1,7 @@
 enum UserType {
-    Buyer = 0,
-    Courier = 1,
-    Admin = 2
+    Buyer = "Buyer",
+    Courier = "Courier",
+    Admin = "Administrator"
 }
 
 export default UserType;
