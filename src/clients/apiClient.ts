@@ -31,6 +31,24 @@ export const updateUser = async (data: UpdateUserState) : Promise<UserDTO> => {
     return response.data;
 }
 
+export const getAllCouriers = async () : Promise<UserDTO[]> => {
+    const response = await axiosInstance.get(`/user/getAllCouriers`);
+
+    return response.data;
+}
+
+export const approveVerification = async (courierId: number) : Promise<UserDTO> => {
+    const response = await axiosInstance.post(`/user/approveVerification`, {courierId});
+
+    return response.data;
+}
+
+export const rejectVerification = async (courierId: number) : Promise<UserDTO> => {
+    const response = await axiosInstance.post(`/user/rejectVerification`, {courierId});
+
+    return response.data;
+}
+
 const axiosInstance = axios.create({
     baseURL: 'http://localhost:5180',
     headers: {
