@@ -1,7 +1,7 @@
 import {LoginDTO} from "../dtos/custom/auth";
 import axios from "axios";
 import UserDTO from "../dtos/models/UserDTO";
-import {CurrentUserState} from "../store/auth/authSliceTypes";
+import {CurrentUserState, UpdateUserState} from "../store/auth/authSliceTypes";
 
 export const login = async (payload: LoginDTO) : Promise<string> => {
     const response = await axiosInstance.post("/auth/login", payload);
@@ -21,6 +21,12 @@ export const getUserById = async (id: number) : Promise<UserDTO> => {
 
 export const getCurrentUserData = async () : Promise<CurrentUserState> => {
     const response = await axiosInstance.get(`/auth/getUserData`);
+
+    return response.data;
+}
+
+export const updateUser = async (data: UpdateUserState) : Promise<UserDTO> => {
+    const response = await axiosInstance.patch(`/user/update`, data);
 
     return response.data;
 }

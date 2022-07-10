@@ -14,7 +14,8 @@ import {
     currentUserSelector,
     fetchUserForUpdate,
     userForUpdateSelector,
-    fetchCurrentUser
+    fetchCurrentUser,
+    updateUser
 } from "../store/auth/authSlice";
 
 export function Profile(){
@@ -81,7 +82,7 @@ export function Profile(){
                 <Button
                     className={"update-button"}
                     variant="contained"
-                    onClick={() => {}}
+                    onClick={() => dispatch(updateUser(userForUpdate))}
                 >Update</Button>
             </div>
 

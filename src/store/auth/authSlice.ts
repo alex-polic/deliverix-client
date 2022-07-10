@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit'
 import * as apiClient from "../../clients/apiClient";
-import {AuthInitialState, initialState} from "./authSliceTypes";
+import {AuthInitialState, initialState, UpdateUserState} from "./authSliceTypes";
 
 export const authSlice = createSlice({
     name: 'auth',
@@ -54,6 +54,12 @@ export const fetchCurrentUser = createAsyncThunk(
     "auth/getUserData",
     async () => {
         return await apiClient.getCurrentUserData();
+    });
+
+export const updateUser = createAsyncThunk(
+    "user/update",
+    async (user: UpdateUserState) => {
+        return await apiClient.updateUser(user);
     });
 
 export const userForUpdateSelector = (state: { auth: AuthInitialState }) => state.auth.updateUser;
