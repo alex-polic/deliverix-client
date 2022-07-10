@@ -4,7 +4,7 @@ import {
     AccountBox,
     AssignmentLate,
     AssignmentTurnedIn,
-    Attachment,
+    Attachment, Fastfood,
     Receipt,
     ReceiptLong
 } from "@mui/icons-material";
@@ -47,6 +47,12 @@ export function Dashboard(){
                         href={"/admin/orders"}
                         pageTitle={"All Orders"}
                         pageIcon={<ReceiptLong />}
+                        />
+
+                        <PageCard
+                            href={"/admin/products"}
+                            pageTitle={"Products"}
+                            pageIcon={<Fastfood />}
                         />
                     </>
                 }
