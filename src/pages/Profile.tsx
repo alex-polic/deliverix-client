@@ -3,49 +3,71 @@ import {Button, TextField} from "@mui/material";
 import {DateTime} from "luxon";
 import {useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "../store/hooks";
-import {fetchUserForUpdate, userForUpdate} from "../store/auth/authSlice";
+import {
+    userForUpdateUsername,
+    userForUpdateEmail,
+    userForUpdatePassword,
+    userForUpdatePasswordConfirmation,
+    userForUpdateFullName,
+    userForUpdateAddress,
+    userForUpdateDateOfBirth,
+    currentUserSelector,
+    fetchUserForUpdate,
+    userForUpdateSelector,
+    fetchCurrentUser
+} from "../store/auth/authSlice";
 
 export function Profile(){
 
     const dispatch = useAppDispatch();
-    const user = useAppSelector(userForUpdate)
+    const currentUserData = useAppSelector(currentUserSelector);
+    const userForUpdate = useAppSelector(userForUpdateSelector);
 
     useEffect(() => {
-        dispatch(fetchUserForUpdate(16))
-    }, [dispatch])
-
-    console.log(DateTime.fromISO(user.dateOfBirth))
+        if(currentUserData.id > 0){
+            dispatch(fetchUserForUpdate(currentUserData.id));
+            return;
+        }
+        dispatch(fetchCurrentUser());
+    }, [currentUserData])
     return(
         <Layout title={"Profile"}>
             <h1>Your Deliverix profile</h1>
             <h2>View or edit your personal data.</h2>
             <div className={"profile-container"}>
                 <TextField
-                    value={user.username}
+                    value={userForUpdate.username}
                     className={"register-input"}
+                    onChange={(e) => dispatch(userForUpdateUsername(e.target.value))}
                     label="Username" />
                 <TextField
-                    value={user.email}
+                    value={userForUpdate.email}
                     className={"register-input"}
+                    onChange={(e) => dispatch(userForUpdateEmail(e.target.value))}
                     label="Email" />
                 <TextField
-                    value={""}
+                    value={userForUpdate.password}
                     className={"register-input"}
+                    onChange={(e) => dispatch(userForUpdatePassword(e.target.value))}
                     label="Password"/>
                 <TextField
-                    value={""}
+                    value={userForUpdate.passwordConfirmation}
                     className={"register-input"}
+                    onChange={(e) => dispatch(userForUpdatePasswordConfirmation(e.target.value))}
                     label="Confirm Password"/>
                 <TextField
-                    value={user.fullName}
+                    value={userForUpdate.fullName}
                     className={"register-input"}
+                    onChange={(e) => dispatch(userForUpdateFullName(e.target.value))}
                     label="Full Name"/>
                 <TextField
-                    value={user.address}
+                    value={userForUpdate.address}
                     className={"register-input"}
+                    onChange={(e) => dispatch(userForUpdateAddress(e.target.value))}
                     label="Address"/>
                 <TextField
-                    value={DateTime.fromISO(user.dateOfBirth).toFormat("yyyy-MM-dd")}
+                    value={DateTime.fromISO(userForUpdate.dateOfBirth).toFormat("yyyy-MM-dd")}
+                    onChange={(e) => dispatch(userForUpdateDateOfBirth(e.target.value))}
                     className={"register-input"}
                     id="date"
                     label="Birthday"

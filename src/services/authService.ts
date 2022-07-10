@@ -3,7 +3,7 @@ import * as apiClient from "../clients/apiClient"
 export const login = async (email: string, password: string) => {
     const payload = {email, password};
     const token = await apiClient.login(payload);
-    console.log(token);
+
     localStorage.setItem("token", token);
 }
 

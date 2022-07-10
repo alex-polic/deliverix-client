@@ -1,90 +1,72 @@
-import type {PayloadAction} from '@reduxjs/toolkit'
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
+import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit'
 import * as apiClient from "../../clients/apiClient";
-
-// Define a type for the slice state
-interface LoginState {
-    email: string,
-    password: string,
-}
-
-interface RegisterState {
-    email: string,
-    password: string,
-}
-
-interface UpdateUserState {
-    email: string,
-    password: string,
-    passwordConfirmation: string,
-    username: string,
-    fullName: string,
-    address: string,
-    dateOfBirth: string
-}
-
-interface AuthInitialState {
-    login: LoginState,
-    register: RegisterState,
-    updateUser: UpdateUserState,
-    isLoggedIn: boolean
-}
-
-// Define the initial state using that type
-const initialState: AuthInitialState = {
-    login: {
-        email: "",
-        password: ""
-    },
-    updateUser: {
-        email: "",
-        password: "",
-        passwordConfirmation: "",
-        username: "",
-        fullName: "",
-        address: "",
-        dateOfBirth: ""
-    },
-    register: {
-        email: "",
-        password: ""
-    },
-    isLoggedIn: !!localStorage.getItem("token"),
-}
+import {AuthInitialState, initialState} from "./authSliceTypes";
 
 export const authSlice = createSlice({
     name: 'auth',
     // `createSlice` will infer the state type from the `initialState` argument
     initialState,
     reducers: {
-        setLoginEmail: (state, action: PayloadAction<string>) => {
-            console.log(action);
-          state.login.email = action.payload;
+        userForUpdateUsername: (state, action: PayloadAction<string>) => {
+            state.updateUser.username = action.payload
         },
-        setLoginPassword: (state, action: PayloadAction<string>) => {
-            console.log(action)
-            state.login.password = action.payload;
+        userForUpdateEmail: (state, action: PayloadAction<string>) => {
+            state.updateUser.email = action.payload
         },
+        userForUpdatePassword: (state, action: PayloadAction<string>) => {
+            state.updateUser.password = action.payload
+        },
+        userForUpdatePasswordConfirmation: (state, action: PayloadAction<string>) => {
+            state.updateUser.passwordConfirmation = action.payload
+        },
+        userForUpdateFullName: (state, action: PayloadAction<string>) => {
+            state.updateUser.fullName = action.payload
+        },
+        userForUpdateAddress: (state, action: PayloadAction<string>) => {
+            state.updateUser.address = action.payload
+        },
+        userForUpdateDateOfBirth: (state, action: PayloadAction<string>) => {
+            state.updateUser.dateOfBirth = action.payload
+        }
     },
     extraReducers: builder =>  {
         builder.addCase(fetchUserForUpdate.fulfilled, (state, action) => {
-            console.log(action.payload);
+
             state.updateUser = {
                 ...action.payload,
+                password: "",
                 passwordConfirmation: "",
             };
+        });
+        builder.addCase(fetchCurrentUser.fulfilled, (state, action) => {
+            state.currentUser = action.payload
         })
     }
 })
 
 export const fetchUserForUpdate = createAsyncThunk(
-    "",
+    "user/update",
     async (id: number) => {
         return await apiClient.getUserById(id);
     });
 
-export const { setLoginEmail, setLoginPassword } = authSlice.actions
+export const fetchCurrentUser = createAsyncThunk(
+    "auth/getUserData",
+    async () => {
+        return await apiClient.getCurrentUserData();
+    });
 
-export const userForUpdate = (state: { auth: AuthInitialState }) => state.auth.updateUser;
+export const userForUpdateSelector = (state: { auth: AuthInitialState }) => state.auth.updateUser;
+export const currentUserSelector = (state: { auth: AuthInitialState }) => state.auth.currentUser;
+
+export const {
+    userForUpdateUsername,
+    userForUpdateEmail,
+    userForUpdatePassword,
+    userForUpdatePasswordConfirmation,
+    userForUpdateFullName,
+    userForUpdateAddress,
+    userForUpdateDateOfBirth
+} = authSlice.actions
 
 export default authSlice.reducer
