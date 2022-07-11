@@ -11,6 +11,10 @@ export const ordersSlice = createSlice({
     reducers: {
     },
     extraReducers: builder =>  {
+        builder.addCase(getCurrentForBuyerWithOrderedProducts.fulfilled, (state, action) => {
+            state.currentOrder = action.payload;
+            state.isCurrentOrderLoaded = true;
+        })
         builder.addCase(fetchOrders.fulfilled, (state, action) => {
             state.orders = action.payload;
             state.areOrdersLoaded = true;
@@ -36,6 +40,12 @@ export const ordersSlice = createSlice({
         })
     }
 });
+
+export const getCurrentForBuyerWithOrderedProducts = createAsyncThunk(
+    "order/getCurrentForBuyerWithOrderedProducts",
+    async () => {
+        return await ordersService.getCurrentForBuyerWithOrderedProducts();
+    });
 
 export const fetchOrders = createAsyncThunk(
     "order/getAll",
@@ -69,7 +79,9 @@ export const deleteOrder = createAsyncThunk(
 
 export const ordersSelector = (state: RootState) => state.orders.orders;
 export const createOrderSelector = (state: RootState) => state.orders.createOrder;
+export const currentOrderSelector = (state: RootState) => state.orders.currentOrder;
 export const areOrdersLoadedSelector = (state: RootState) => state.orders.areOrdersLoaded;
+export const isCurrentOrderLoadedSelector = (state: RootState) => state.orders.isCurrentOrderLoaded;
 
 
 export const {

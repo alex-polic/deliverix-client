@@ -5,6 +5,11 @@ import {CreateOrderState} from "../store/orders/ordersSliceTypes";
 import OrderWithBuyerAndCourierAndOrderedProductsDTO
     from "../dtos/custom/OrderWithBuyerAndCourierAndOrderedProductsDTO";
 
+export async function getCurrentForBuyerWithOrderedProducts()
+    : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO> {
+    return await apiClient.getCurrentForBuyerWithOrderedProducts();
+}
+
 export async function getAllOrders()
     : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO[]> {
 

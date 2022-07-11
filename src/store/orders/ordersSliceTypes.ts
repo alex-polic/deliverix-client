@@ -1,5 +1,6 @@
 import OrderWithBuyerAndCourierAndOrderedProductsDTO
     from "../../dtos/custom/OrderWithBuyerAndCourierAndOrderedProductsDTO";
+import UserType from "../../dtos/enums/userType";
 
 export interface CreateOrderedProductState {
     productId: number,
@@ -16,8 +17,10 @@ export interface CreateOrderState {
 
 export interface OrdersSliceState {
     orders: OrderWithBuyerAndCourierAndOrderedProductsDTO[],
-    createOrder: CreateOrderState
-    areOrdersLoaded: boolean
+    createOrder: CreateOrderState,
+    currentOrder: OrderWithBuyerAndCourierAndOrderedProductsDTO,
+    areOrdersLoaded: boolean,
+    isCurrentOrderLoaded: boolean
 }
 
 export const initialState : OrdersSliceState = {
@@ -29,5 +32,46 @@ export const initialState : OrdersSliceState = {
 
         orderedProducts: []
     },
-    areOrdersLoaded: false
+    currentOrder: {
+        id: 0,
+        buyer: {
+            id: 0,
+            profilePictureUrl: "",
+            fullName: "",
+            username: "",
+            email: "",
+            dateOfBirth: "",
+            verificationStatus: 0,
+            password: "",
+            address: "",
+            userType: UserType.Buyer,
+            createdAt: "",
+            updatedAt: ""
+        },
+        courier: {
+            id: 0,
+            profilePictureUrl: "",
+            fullName: "",
+            username: "",
+            email: "",
+            dateOfBirth: "",
+            verificationStatus: 0,
+            password: "",
+            address: "",
+            userType: UserType.Courier,
+            createdAt: "",
+            updatedAt: ""
+        },
+        deliveryAddress: "",
+        comment: "",
+        fullPrice: 0,
+        deliveryStatus: 0,
+
+        createdAt: "",
+        updatedAt: "",
+
+        orderedProducts: []
+    },
+    areOrdersLoaded: false,
+    isCurrentOrderLoaded: false,
 }

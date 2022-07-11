@@ -83,6 +83,14 @@ export const deleteProduct = async (id: number) : Promise<ProductDTO> => {
 
 // Orders
 
+export const getCurrentForBuyerWithOrderedProducts = async ()
+    : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO> => {
+
+    const response = await axiosInstance.get(`/order/getCurrentForBuyerWithOrderedProducts`);
+
+    return response.data;
+}
+
 export const getAllOrders = async () : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO[]> => {
     const response = await axiosInstance.get(`/order/getAll`);
 
