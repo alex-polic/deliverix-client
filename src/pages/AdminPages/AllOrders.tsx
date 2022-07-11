@@ -7,7 +7,8 @@ import {
     fetchOrders,
     ordersSelector
 } from "../../store/orders/ordersSlice";
-import OrderDTO from "../../dtos/models/OrderDTO";
+import OrderWithBuyerAndCourierAndOrderedProductsDTO
+    from "../../dtos/custom/OrderWithBuyerAndCourierAndOrderedProductsDTO";
 
 export function AllOrders(){
     const dispatch = useAppDispatch();
@@ -25,13 +26,13 @@ export function AllOrders(){
         <Layout title={"Orders"}>
 
             <h1>View all orders in the platform!</h1>
-            {orders.map((order: OrderDTO) => {
+            {orders.map((order: OrderWithBuyerAndCourierAndOrderedProductsDTO) => {
                 return (
                     <OrderCard
                         key={order.id}
                         id={order.id}
-                        buyerFullName={"Test Buyer"}
-                        courierFullName={"Test Courier"}
+                        buyerFullName={order.buyer?.fullName}
+                        courierFullName={order.courier?.fullName}
                         deliveryAddress={order.deliveryAddress}
                         comment={order.comment}
                         fullPrice={order.fullPrice}

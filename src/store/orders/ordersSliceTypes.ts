@@ -1,4 +1,5 @@
-import OrderDTO from "../../dtos/models/OrderDTO";
+import OrderWithBuyerAndCourierAndOrderedProductsDTO
+    from "../../dtos/custom/OrderWithBuyerAndCourierAndOrderedProductsDTO";
 
 export interface CreateOrderedProductState {
     productId: number,
@@ -14,7 +15,7 @@ export interface CreateOrderState {
 }
 
 export interface OrdersSliceState {
-    orders: OrderDTO[],
+    orders: OrderWithBuyerAndCourierAndOrderedProductsDTO[],
     createOrder: CreateOrderState
     areOrdersLoaded: boolean
 }

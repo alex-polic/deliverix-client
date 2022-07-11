@@ -6,6 +6,8 @@ import ProductDTO from "../dtos/models/ProductDTO";
 import {CreateProductState} from "../store/products/productsSliceTypes";
 import OrderDTO from "../dtos/models/OrderDTO";
 import {CreateOrderState} from "../store/orders/ordersSliceTypes";
+import OrderWithBuyerAndCourierAndOrderedProductsDTO
+    from "../dtos/custom/OrderWithBuyerAndCourierAndOrderedProductsDTO";
 
 export const login = async (payload: LoginDTO) : Promise<string> => {
     const response = await axiosInstance.post("/auth/login", payload);
@@ -81,19 +83,27 @@ export const deleteProduct = async (id: number) : Promise<ProductDTO> => {
 
 // Orders
 
-export const getAllOrders = async () : Promise<OrderDTO[]> => {
+export const getAllOrders = async () : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO[]> => {
     const response = await axiosInstance.get(`/order/getAll`);
 
     return response.data;
 }
 
-export const createOrderWithOrderedProducts = async (order: CreateOrderState) : Promise<OrderDTO> => {
+export const getAllPastOrdersForBuyer = async (buyerId: number) : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO[]> => {
+    const response = await axiosInstance.get(`/order/getAllPastForBuyer?${getUrlParams({buyerId})}`);
+
+    return response.data;
+}
+
+export const createOrderWithOrderedProducts = async (order: CreateOrderState)
+    : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO> => {
     const response = await axiosInstance.post(`/order/create`, order);
 
     return response.data;
 }
 
-export const updateOrder = async (order: OrderDTO) : Promise<OrderDTO> => {
+export const updateOrder = async (order: OrderDTO)
+    : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO> => {
     const response = await axiosInstance.patch(`/order/update`, order);
 
     return response.data;

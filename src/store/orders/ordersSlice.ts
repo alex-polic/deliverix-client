@@ -15,6 +15,10 @@ export const ordersSlice = createSlice({
             state.orders = action.payload;
             state.areOrdersLoaded = true;
         })
+        builder.addCase(fetchPastOrdersForBuyer.fulfilled, (state, action) => {
+            state.orders = action.payload;
+            state.areOrdersLoaded = true;
+        })
         builder.addCase(createOrder.fulfilled, (state, action) => {
             state.orders = [...state.orders, action.payload];
         })
@@ -37,6 +41,12 @@ export const fetchOrders = createAsyncThunk(
     "order/getAll",
     async () => {
         return await ordersService.getAllOrders();
+    });
+
+export const fetchPastOrdersForBuyer = createAsyncThunk(
+    "order/getAllPastOrdersForBuyer",
+    async (buyerId: number) => {
+        return await ordersService.getAllPastOrdersForBuyer(buyerId);
     });
 
 export const createOrder = createAsyncThunk(

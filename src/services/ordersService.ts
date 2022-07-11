@@ -2,9 +2,19 @@ import OrderDTO from "../dtos/models/OrderDTO";
 
 import * as apiClient from "../clients/apiClient";
 import {CreateOrderState} from "../store/orders/ordersSliceTypes";
+import OrderWithBuyerAndCourierAndOrderedProductsDTO
+    from "../dtos/custom/OrderWithBuyerAndCourierAndOrderedProductsDTO";
 
-export async function getAllOrders(): Promise<OrderDTO[]> {
+export async function getAllOrders()
+    : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO[]> {
+
     return await apiClient.getAllOrders();
+}
+
+export async function getAllPastOrdersForBuyer(buyerId: number)
+    : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO[]> {
+
+    return await apiClient.getAllPastOrdersForBuyer(buyerId);
 }
 
 export async function createOrderWithOrderedProducts(order: CreateOrderState) {

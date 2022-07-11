@@ -7,6 +7,8 @@ import {Profile} from "../pages/Profile";
 import {Verifications} from "../pages/AdminPages/Verifications";
 import {AllOrders} from "../pages/AdminPages/AllOrders";
 import {Products} from "../pages/AdminPages/Products";
+import {BuyerOrder} from "../pages/BuyerPages/BuyerOrder";
+import {BuyerPastOrders} from "../pages/BuyerPages/BuyerPastOrders";
 
 export function MainRouter() {
     return(
@@ -37,6 +39,17 @@ export function MainRouter() {
             <Route path="/admin/products" element={
                 <ProtectedRoute>
                     < Products />
+                </ProtectedRoute>}>
+            </Route>
+
+            <Route path="/buyer/order" element={
+                <ProtectedRoute>
+                    < BuyerOrder />
+                </ProtectedRoute>}>
+            </Route>
+            <Route path="/buyer/pastOrders" element={
+                <ProtectedRoute>
+                    < BuyerPastOrders />
                 </ProtectedRoute>}>
             </Route>
         </Routes>
