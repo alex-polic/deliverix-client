@@ -1,0 +1,24 @@
+.primary-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &-container{
+    min-width: 60%;
+    min-height: 70%;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+
+    background-color: $secondary-green;
+  }
+}
+
+.product-form {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+
+  .product-input {
+    margin: 10px 0;
+  }
+}

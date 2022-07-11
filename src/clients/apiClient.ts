@@ -2,6 +2,8 @@ import {LoginDTO} from "../dtos/custom/auth";
 import axios from "axios";
 import UserDTO from "../dtos/models/UserDTO";
 import {CurrentUserState, UpdateUserState} from "../store/auth/authSliceTypes";
+import ProductDTO from "../dtos/models/ProductDTO";
+import {CreateProductState} from "../store/products/productsSliceTypes";
 
 export const login = async (payload: LoginDTO) : Promise<string> => {
     const response = await axiosInstance.post("/auth/login", payload);
@@ -45,6 +47,32 @@ export const approveVerification = async (courierId: number) : Promise<UserDTO> 
 
 export const rejectVerification = async (courierId: number) : Promise<UserDTO> => {
     const response = await axiosInstance.post(`/user/rejectVerification`, {courierId});
+
+    return response.data;
+}
+
+// Products
+
+export const getAllProducts = async () : Promise<ProductDTO[]> => {
+    const response = await axiosInstance.get(`/product/getAll`);
+
+    return response.data;
+}
+
+export const createProduct = async (product: CreateProductState) : Promise<ProductDTO> => {
+    const response = await axiosInstance.post(`/product/create`, product);
+
+    return response.data;
+}
+
+export const updateProduct = async (product: ProductDTO) : Promise<ProductDTO> => {
+    const response = await axiosInstance.patch(`/product/update`, product);
+
+    return response.data;
+}
+
+export const deleteProduct = async (id: number) : Promise<ProductDTO> => {
+    const response = await axiosInstance.delete(`/product/delete?${getUrlParams({id})}`);
 
     return response.data;
 }
