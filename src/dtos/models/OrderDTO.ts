@@ -1,3 +1,5 @@
+import DeliveryStatus from "../enums/deliveryStatus";
+
 export default interface OrderDTO {
     id: number,
 
@@ -6,7 +8,7 @@ export default interface OrderDTO {
     deliveryAddress: string,
     comment: string,
     fullPrice: number,
-    deliveryStatus: number,
+    deliveryStatus: DeliveryStatus,
 
     createdAt: string
     updatedAt: string
