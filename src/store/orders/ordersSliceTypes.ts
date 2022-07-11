@@ -7,7 +7,6 @@ export interface CreateOrderedProductState {
 
 export interface CreateOrderState {
     buyerId: number,
-    courierId: number,
     deliveryAddress: string,
     comment: string,
 
@@ -24,7 +23,6 @@ export const initialState : OrdersSliceState = {
     orders: [],
     createOrder: {
         buyerId: 0,
-        courierId: 0,
         deliveryAddress: "",
         comment: "",
 
