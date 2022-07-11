@@ -2,6 +2,7 @@ import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {CreateProductState, initialState} from "./productsSliceTypes";
 import * as productsService from "../../services/productsService";
 import ProductDTO from "../../dtos/models/ProductDTO";
+import {RootState} from "../store";
 
 export const productsSlice = createSlice({
     name: 'products',
@@ -77,10 +78,10 @@ export const deleteProduct = createAsyncThunk(
         return await productsService.deleteProduct(id);
     });
 
-export const productsSelector = (state: any) => state.products.products;
-export const createProductSelector = (state: any) => state.products.createProduct;
-export const updateProductSelector = (state: any) => state.products.updateProduct;
-export const areProductsLoadedSelector = (state: any) => state.products.areProductsLoaded;
+export const productsSelector = (state: RootState) => state.products.products;
+export const createProductSelector = (state: RootState) => state.products.createProduct;
+export const updateProductSelector = (state: RootState) => state.products.updateProduct;
+export const areProductsLoadedSelector = (state: RootState) => state.products.areProductsLoaded;
 
 
 export const {
