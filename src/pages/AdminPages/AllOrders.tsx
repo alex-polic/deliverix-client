@@ -15,9 +15,9 @@ export function AllOrders(){
     const orders = useAppSelector(ordersSelector);
 
     useEffect(() => {
-        if(!areOrdersLoaded){
-            dispatch(fetchOrders());
-        }
+        if(areOrdersLoaded) return;
+
+        dispatch(fetchOrders());
     }, [dispatch, areOrdersLoaded])
 
 
