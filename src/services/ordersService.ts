@@ -10,6 +10,11 @@ export async function getCurrentForBuyerWithOrderedProducts()
     return await apiClient.getCurrentForBuyerWithOrderedProducts();
 }
 
+export async function getCurrentForCourierWithOrderedProducts()
+    : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO> {
+    return await apiClient.getCurrentForCourierWithOrderedProducts();
+}
+
 export async function getAllOrders()
     : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO[]> {
 
@@ -26,6 +31,18 @@ export async function getAllPastOrdersForCourier(courierId: number)
     : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO[]> {
 
     return await apiClient.getAllPastOrdersForCourier(courierId);
+}
+
+export async function getAllPendingOrders()
+    : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO[]> {
+
+    return await apiClient.getAllPendingOrders();
+}
+
+export async function acceptDeliveryOfOrder(orderId: number)
+    : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO> {
+
+    return await apiClient.acceptDeliveryOfOrder(orderId);
 }
 
 export async function createOrderWithOrderedProducts(order: CreateOrderState) {

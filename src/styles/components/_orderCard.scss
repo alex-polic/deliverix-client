@@ -14,3 +14,11 @@
     width: 33%;
   }
 }
+.neworders-container {
+  display: flex;
+  flex-direction: column;
+
+  .deliver-order {
+    margin: 20px 0;
+  }
+}

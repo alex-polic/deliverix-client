@@ -15,6 +15,10 @@ export const ordersSlice = createSlice({
             state.currentOrder = action.payload;
             state.isCurrentOrderLoaded = true;
         })
+        builder.addCase(getCurrentForCourierWithOrderedProducts.fulfilled, (state, action) => {
+            state.currentOrder = action.payload;
+            state.isCurrentOrderLoaded = true;
+        })
         builder.addCase(fetchOrders.fulfilled, (state, action) => {
             state.orders = action.payload;
             state.areOrdersLoaded = true;
@@ -26,6 +30,13 @@ export const ordersSlice = createSlice({
         builder.addCase(fetchPastOrdersForCourier.fulfilled, (state, action) => {
             state.orders = action.payload;
             state.areOrdersLoaded = true;
+        })
+        builder.addCase(fetchPendingOrders.fulfilled, (state, action) => {
+            state.orders = action.payload;
+            state.areOrdersLoaded = true;
+        })
+        builder.addCase(acceptDeliveryOfOrder.fulfilled, (state) => {
+            state.areOrdersLoaded = false;
         })
         builder.addCase(createOrder.fulfilled, () => {
             window.location.reload();
@@ -51,6 +62,12 @@ export const getCurrentForBuyerWithOrderedProducts = createAsyncThunk(
         return await ordersService.getCurrentForBuyerWithOrderedProducts();
     });
 
+export const getCurrentForCourierWithOrderedProducts = createAsyncThunk(
+    "order/getCurrentForCourierWithOrderedProducts",
+    async () => {
+        return await ordersService.getCurrentForCourierWithOrderedProducts();
+    });
+
 export const fetchOrders = createAsyncThunk(
     "order/getAll",
     async () => {
@@ -67,6 +84,18 @@ export const fetchPastOrdersForCourier = createAsyncThunk(
     "order/getAllPastOrdersForCourier",
     async (courierId: number) => {
         return await ordersService.getAllPastOrdersForCourier(courierId);
+    });
+
+export const fetchPendingOrders = createAsyncThunk(
+    "order/getAllPendingOrders",
+    async () => {
+        return await ordersService.getAllPendingOrders();
+    });
+
+export const acceptDeliveryOfOrder = createAsyncThunk(
+    "order/acceptDeliveryOfOrder",
+    async (id: number) => {
+        return await ordersService.acceptDeliveryOfOrder(id);
     });
 
 export const createOrder = createAsyncThunk(

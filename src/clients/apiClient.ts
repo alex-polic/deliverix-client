@@ -91,6 +91,14 @@ export const getCurrentForBuyerWithOrderedProducts = async ()
     return response.data;
 }
 
+export const getCurrentForCourierWithOrderedProducts = async ()
+    : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO> => {
+
+    const response = await axiosInstance.get(`/order/getCurrentForCourierWithOrderedProducts`);
+
+    return response.data;
+}
+
 export const getAllOrders = async () : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO[]> => {
     const response = await axiosInstance.get(`/order/getAll`);
 
@@ -105,6 +113,18 @@ export const getAllPastOrdersForBuyer = async (buyerId: number) : Promise<OrderW
 
 export const getAllPastOrdersForCourier = async (courierId: number) : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO[]> => {
     const response = await axiosInstance.get(`/order/getAllPastForCourier?${getUrlParams({courierId})}`);
+
+    return response.data;
+}
+
+export const getAllPendingOrders = async () : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO[]> => {
+    const response = await axiosInstance.get(`/order/getAllPendingOrders`);
+
+    return response.data;
+}
+
+export const acceptDeliveryOfOrder = async (orderId: number) : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO> => {
+    const response = await axiosInstance.post(`/order/acceptDeliveryOfOrder?${getUrlParams({orderId})}`);
 
     return response.data;
 }
