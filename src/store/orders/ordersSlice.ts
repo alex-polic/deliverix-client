@@ -23,8 +23,8 @@ export const ordersSlice = createSlice({
             state.orders = action.payload;
             state.areOrdersLoaded = true;
         })
-        builder.addCase(createOrder.fulfilled, (state, action) => {
-            state.orders = [...state.orders, action.payload];
+        builder.addCase(createOrder.fulfilled, () => {
+            window.location.reload();
         })
         builder.addCase(updateOrder.fulfilled, (state, action) => {
             let index = state.orders.findIndex(e => e.id === action.payload.id);
