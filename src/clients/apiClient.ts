@@ -105,7 +105,7 @@ export const getAllPastOrdersForBuyer = async (buyerId: number) : Promise<OrderW
 
 export const createOrderWithOrderedProducts = async (order: CreateOrderState)
     : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO> => {
-    const response = await axiosInstance.post(`/order/create`, order);
+    const response = await axiosInstance.post(`/order/createWithOrderedProducts`, order);
 
     return response.data;
 }
