@@ -103,6 +103,12 @@ export const getAllPastOrdersForBuyer = async (buyerId: number) : Promise<OrderW
     return response.data;
 }
 
+export const getAllPastOrdersForCourier = async (courierId: number) : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO[]> => {
+    const response = await axiosInstance.get(`/order/getAllPastForCourier?${getUrlParams({courierId})}`);
+
+    return response.data;
+}
+
 export const createOrderWithOrderedProducts = async (order: CreateOrderState)
     : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO> => {
     const response = await axiosInstance.post(`/order/createWithOrderedProducts`, order);

@@ -22,6 +22,12 @@ export async function getAllPastOrdersForBuyer(buyerId: number)
     return await apiClient.getAllPastOrdersForBuyer(buyerId);
 }
 
+export async function getAllPastOrdersForCourier(courierId: number)
+    : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO[]> {
+
+    return await apiClient.getAllPastOrdersForCourier(courierId);
+}
+
 export async function createOrderWithOrderedProducts(order: CreateOrderState) {
     return await apiClient.createOrderWithOrderedProducts(order);
 }

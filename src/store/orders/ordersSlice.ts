@@ -23,6 +23,10 @@ export const ordersSlice = createSlice({
             state.orders = action.payload;
             state.areOrdersLoaded = true;
         })
+        builder.addCase(fetchPastOrdersForCourier.fulfilled, (state, action) => {
+            state.orders = action.payload;
+            state.areOrdersLoaded = true;
+        })
         builder.addCase(createOrder.fulfilled, () => {
             window.location.reload();
         })
@@ -57,6 +61,12 @@ export const fetchPastOrdersForBuyer = createAsyncThunk(
     "order/getAllPastOrdersForBuyer",
     async (buyerId: number) => {
         return await ordersService.getAllPastOrdersForBuyer(buyerId);
+    });
+
+export const fetchPastOrdersForCourier = createAsyncThunk(
+    "order/getAllPastOrdersForCourier",
+    async (courierId: number) => {
+        return await ordersService.getAllPastOrdersForCourier(courierId);
     });
 
 export const createOrder = createAsyncThunk(
