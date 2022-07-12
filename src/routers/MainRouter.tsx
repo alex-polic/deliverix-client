@@ -9,6 +9,9 @@ import {AllOrders} from "../pages/AdminPages/AllOrders";
 import {Products} from "../pages/AdminPages/Products";
 import {BuyerOrder} from "../pages/BuyerPages/BuyerOrder";
 import {BuyerPastOrders} from "../pages/BuyerPages/BuyerPastOrders";
+import MyOrders from "../pages/CourierPages/MyOrders";
+import {NewOrders} from "../pages/CourierPages/NewOrders";
+import CourierCurrentOrder from "../pages/CourierPages/CourierCurrentOrder";
 
 export function MainRouter() {
     return(
@@ -50,6 +53,22 @@ export function MainRouter() {
             <Route path="/buyer/pastOrders" element={
                 <ProtectedRoute>
                     < BuyerPastOrders />
+                </ProtectedRoute>}>
+            </Route>
+
+            <Route path="/courier/myOrders" element={
+                <ProtectedRoute>
+                    < MyOrders />
+                </ProtectedRoute>}>
+            </Route>
+            <Route path="/courier/newOrder" element={
+                <ProtectedRoute>
+                    < NewOrders />
+                </ProtectedRoute>}>
+            </Route>
+            <Route path="/courier/currentOrder" element={
+                <ProtectedRoute>
+                    < CourierCurrentOrder />
                 </ProtectedRoute>}>
             </Route>
         </Routes>
