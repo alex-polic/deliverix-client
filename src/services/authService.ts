@@ -5,6 +5,7 @@ export const login = async (email: string, password: string) => {
     const token = await apiClient.login(payload);
 
     localStorage.setItem("token", token);
+    return token;
 }
 
 export const register = async (formData: FormData) => {

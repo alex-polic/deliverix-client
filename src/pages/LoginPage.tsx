@@ -4,9 +4,11 @@ import {useState} from "react";
 
 import * as authService from "../services/authService";
 import {useNavigate} from "react-router-dom";
+import {useAppDispatch} from "../store/hooks";
+import {fetchCurrentUser} from "../store/auth/authSlice";
 
 export function LoginPage(){
-
+    const dispatch = useAppDispatch();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -14,6 +16,8 @@ export function LoginPage(){
 
     const loginUser = async () => {
         await authService.login(email, password);
+
+        dispatch(fetchCurrentUser());
         navigate('/dashboard');
     }
 

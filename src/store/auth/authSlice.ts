@@ -27,6 +27,11 @@ export const authSlice = createSlice({
         },
         userForUpdateDateOfBirth: (state, action: PayloadAction<string>) => {
             state.updateUser.dateOfBirth = action.payload
+        },
+        logout: (state) => {
+            localStorage.removeItem("token");
+            window.location.reload();
+            state.isLoggedIn = false;
         }
     },
     extraReducers: builder =>  {
@@ -72,7 +77,8 @@ export const {
     userForUpdatePasswordConfirmation,
     userForUpdateFullName,
     userForUpdateAddress,
-    userForUpdateDateOfBirth
+    userForUpdateDateOfBirth,
+    logout
 } = authSlice.actions
 
 export default authSlice.reducer

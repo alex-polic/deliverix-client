@@ -1,11 +1,10 @@
 import { Navigate } from "react-router-dom";
 
-
-
 const ProtectedRoute = ({
     redirectPath = '/',
     children,
 }: any) => {
+
     const isLoggedIn = !!localStorage.getItem("token");
 
     if (!isLoggedIn) {
