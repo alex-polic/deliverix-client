@@ -21,7 +21,8 @@ export interface UpdateUserState {
 export interface CurrentUserState {
     id: number,
     email: string,
-    role: string
+    role: string,
+    verificationStatus: string
 }
 
 export interface AuthInitialState {
@@ -55,6 +56,7 @@ export const initialState: AuthInitialState = {
     currentUser: {
         id: 0,
         email: "",
-        role: ""
+        role: "",
+        verificationStatus: ""
     }
 }

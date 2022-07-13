@@ -12,6 +12,7 @@ import {BuyerPastOrders} from "../pages/BuyerPages/BuyerPastOrders";
 import MyOrders from "../pages/CourierPages/MyOrders";
 import {NewOrders} from "../pages/CourierPages/NewOrders";
 import CourierCurrentOrder from "../pages/CourierPages/CourierCurrentOrder";
+import Verification from "../pages/CourierPages/Verification";
 
 export function MainRouter() {
     return(
@@ -70,6 +71,11 @@ export function MainRouter() {
                 <ProtectedRoute>
                     < CourierCurrentOrder />
                 </ProtectedRoute>}>
+            </Route>
+
+            <Route path="/courier/verification" element={
+                <Verification/>
+            }>
             </Route>
         </Routes>
     );
