@@ -129,6 +129,12 @@ export const acceptDeliveryOfOrder = async (orderId: number) : Promise<OrderWith
     return response.data;
 }
 
+export const finishDeliveryOfOrder = async (orderId: number) : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO> => {
+    const response = await axiosInstance().post(`/order/finishDeliveryOfOrder?${getUrlParams({orderId})}`);
+
+    return response.data;
+}
+
 export const createOrderWithOrderedProducts = async (order: CreateOrderState)
     : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO> => {
     const response = await axiosInstance().post(`/order/createWithOrderedProducts`, order);

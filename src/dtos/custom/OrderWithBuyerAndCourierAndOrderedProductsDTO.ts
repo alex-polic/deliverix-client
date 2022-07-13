@@ -10,6 +10,7 @@ export default interface OrderWithBuyerAndCourierAndOrderedProductsDTO {
     comment: string,
     fullPrice: number,
     deliveryStatus: number,
+    deliveryDateTime: string,
 
     orderedProducts: OrderedProductDTO[],
 

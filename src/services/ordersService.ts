@@ -45,6 +45,12 @@ export async function acceptDeliveryOfOrder(orderId: number)
     return await apiClient.acceptDeliveryOfOrder(orderId);
 }
 
+export async function finishDeliveryOfOrder(orderId: number)
+    : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO> {
+
+    return await apiClient.finishDeliveryOfOrder(orderId);
+}
+
 export async function createOrderWithOrderedProducts(order: CreateOrderState) {
     return await apiClient.createOrderWithOrderedProducts(order);
 }

@@ -2,12 +2,27 @@ import OrderWithBuyerAndCourierAndOrderedProductsDTO
     from "../dtos/custom/OrderWithBuyerAndCourierAndOrderedProductsDTO";
 import {Receipt} from "@mui/icons-material";
 import DeliveryStatus from "../dtos/enums/deliveryStatus";
+import {useAppDispatch} from "../store/hooks";
+import {finishDeliveryOfOrder} from "../store/orders/ordersSlice";
 
 interface CurrentOrderCardProps {
     order: OrderWithBuyerAndCourierAndOrderedProductsDTO,
+    timeRemaining: number
 }
 
-export function CurrentOrderCard({ order }: CurrentOrderCardProps) {
+export function CurrentOrderCard({ order, timeRemaining }: CurrentOrderCardProps) {
+    const dispatch = useAppDispatch();
+
+    if(timeRemaining <= 0 && order.deliveryStatus === DeliveryStatus.Accepted)
+        dispatch(finishDeliveryOfOrder(order.id))
+
+    const getTimerText = () => {
+        if(order.deliveryDateTime === null)
+            return "TBA";
+
+        return timeRemaining > 0 ? timeRemaining.toFixed(0) : 0
+    }
+
     return (
         <div className={"currentorder-container"}>
             <div className={"currentorder-meta"}>
@@ -15,7 +30,7 @@ export function CurrentOrderCard({ order }: CurrentOrderCardProps) {
                     <Receipt />
                 </div>
                 <div className={"currentorder-timer"}>
-                    <p className={"timer-text"}>03</p>
+                    <p className={"timer-text"}>{getTimerText()}</p>
                     <p className={"timer-text--small"}>TIME TO DELIVERY</p>
                 </div>
             </div>

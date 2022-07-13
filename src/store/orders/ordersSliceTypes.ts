@@ -66,6 +66,7 @@ export const initialState : OrdersSliceState = {
         comment: "",
         fullPrice: 0,
         deliveryStatus: 0,
+        deliveryDateTime: "",
 
         createdAt: "",
         updatedAt: "",

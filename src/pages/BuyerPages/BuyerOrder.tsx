@@ -5,19 +5,35 @@ import {
     getCurrentForBuyerWithOrderedProducts,
     isCurrentOrderLoadedSelector
 } from "../../store/orders/ordersSlice";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {CurrentOrderCard} from "../../components/CurrentOrderCard";
 import {NewOrderForm} from "../../components/NewOrderForm";
+import {DateTime} from "luxon";
+import DeliveryStatus from "../../dtos/enums/deliveryStatus";
 
 export function BuyerOrder() {
     const dispatch = useAppDispatch();
     const currentOrder = useAppSelector(currentOrderSelector);
     const isCurrentOrderLoaded = useAppSelector(isCurrentOrderLoadedSelector);
 
+    const [timeRemaining, setTimeRemaining] = useState(20);
+
     useEffect(() => {
         if(currentOrder && currentOrder.id === 0 && !isCurrentOrderLoaded){
             dispatch(getCurrentForBuyerWithOrderedProducts());
+            return;
         }
+
+        const interval = setInterval(() => {
+
+            setTimeRemaining(DateTime
+                .fromISO(currentOrder.deliveryDateTime)
+                .diff(DateTime.fromJSDate(new Date()),"seconds")
+                .seconds)
+            ;
+        },1000);
+
+        return () => clearInterval(interval)
     }, [currentOrder, isCurrentOrderLoaded])
 
     return(
@@ -27,8 +43,13 @@ export function BuyerOrder() {
                 isCurrentOrderLoaded && currentOrder &&
                 <>
                     <h1>Your current order</h1>
-                    <CurrentOrderCard order={currentOrder} />
+                    <CurrentOrderCard order={currentOrder} timeRemaining={timeRemaining} />
                 </>
+            }
+
+            {
+                !currentOrder || currentOrder.deliveryStatus === DeliveryStatus.Delivered &&
+                <h1>Your order is delivered. Refresh the page to create a new one</h1>
             }
 
             {

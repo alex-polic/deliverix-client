@@ -38,6 +38,13 @@ export const ordersSlice = createSlice({
         builder.addCase(acceptDeliveryOfOrder.fulfilled, (state) => {
             state.areOrdersLoaded = false;
         })
+        builder.addCase(finishDeliveryOfOrder.pending, (state) => {
+            state.isCurrentOrderLoaded = false;
+        })
+        builder.addCase(finishDeliveryOfOrder.fulfilled, (state, action) => {
+            state.currentOrder = action.payload;
+            state.isCurrentOrderLoaded = true;
+        })
         builder.addCase(createOrder.fulfilled, () => {
             window.location.reload();
         })
@@ -96,6 +103,12 @@ export const acceptDeliveryOfOrder = createAsyncThunk(
     "order/acceptDeliveryOfOrder",
     async (id: number) => {
         return await ordersService.acceptDeliveryOfOrder(id);
+    });
+
+export const finishDeliveryOfOrder = createAsyncThunk(
+    "order/finishDeliveryOfOrder",
+    async (orderId: number) => {
+        return await ordersService.finishDeliveryOfOrder(orderId);
     });
 
 export const createOrder = createAsyncThunk(
