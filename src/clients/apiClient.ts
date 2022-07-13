@@ -1,5 +1,5 @@
 import {LoginDTO} from "../dtos/custom/auth";
-import axios from "axios";
+import axios, {AxiosError, AxiosResponse} from "axios";
 import UserDTO from "../dtos/models/UserDTO";
 import {CurrentUserState, UpdateUserState} from "../store/auth/authSliceTypes";
 import ProductDTO from "../dtos/models/ProductDTO";
@@ -8,6 +8,8 @@ import OrderDTO from "../dtos/models/OrderDTO";
 import {CreateOrderState} from "../store/orders/ordersSliceTypes";
 import OrderWithBuyerAndCourierAndOrderedProductsDTO
     from "../dtos/custom/OrderWithBuyerAndCourierAndOrderedProductsDTO";
+import {store} from "../store/store";
+import {logout} from "../store/auth/authSlice";
 
 export const login = async (payload: LoginDTO) : Promise<string> => {
     const response = await axiosInstance().post("/auth/login", payload);
@@ -155,15 +157,37 @@ export const deleteOrder = async (id: number) : Promise<OrderDTO> => {
     return response.data;
 }
 
-const axiosInstance =  () => {
+export const axiosInstance =  () => {
     const token = localStorage.getItem("token")
-    return axios.create({
+    const instance = axios.create({
         baseURL: 'http://localhost:5180',
         headers: {
             'X-Custom-Header': 'foobar',
             'Authorization': `Bearer ${token}`
         }
     });
+
+    instance.interceptors.response.use(
+        (next: AxiosResponse) => Promise.resolve(next),
+        (error: AxiosError) => {
+
+            if(error.response?.status === 401 || error.response?.status == 403)
+                store.dispatch(logout());
+
+            if(error.response?.status === 400)
+            {
+                const errorData = error.response.data as ServerError
+                alert(errorData.Message);
+            }
+
+            if(error.response?.status === 500)
+            {
+                alert("Something went wrong on the server side");
+            }
+        }
+    );
+
+    return instance;
 }
 
 const getUrlParams = (data: object) : string => {
@@ -173,4 +197,10 @@ const getUrlParams = (data: object) : string => {
     }
 
     return result;
+}
+
+interface ServerError {
+    Message: string,
+    StatusCode: number,
+    ErrorCode: number
 }
