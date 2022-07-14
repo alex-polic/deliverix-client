@@ -32,6 +32,12 @@ export function NewOrderForm() {
         setCreateOrderState({...createOrderState, orderedProducts: orderedProducts});
     }
 
+    const onAmountChange = (index: number, value: number) => {
+        orderedProducts[index].amount = value;
+        setOrderedProducts([...orderedProducts]);
+        setCreateOrderState({...createOrderState, orderedProducts: orderedProducts});
+    }
+
     const onProductAdd = () => {
         const newOrderedProducts = [...orderedProducts, {
             productId: 1,
@@ -92,9 +98,11 @@ export function NewOrderForm() {
                         index={index}
                         products={products}
                         value={e.productId}
+                        amount={e.amount}
                         onProductChange={onProductChange}
                         onProductAdd={onProductAdd}
                         onProductRemove={onProductRemove}
+                        onAmountChange={onAmountChange}
                     />
                 )
             }

@@ -37,6 +37,7 @@ export const ordersSlice = createSlice({
         })
         builder.addCase(acceptDeliveryOfOrder.fulfilled, (state) => {
             state.areOrdersLoaded = false;
+            alert("Order accepted. Go to current order page to track it.");
         })
         builder.addCase(finishDeliveryOfOrder.pending, (state) => {
             state.isCurrentOrderLoaded = false;

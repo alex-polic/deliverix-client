@@ -6,12 +6,24 @@ interface ProductPickerProps {
     index: number
     products: ProductDTO[],
     value: number,
+    amount: number,
     onProductChange: Function,
     onProductAdd: Function,
     onProductRemove: Function,
+    onAmountChange: Function,
 }
 
-export function ProductPicker ({index, products, value, onProductChange, onProductAdd, onProductRemove }: ProductPickerProps) {
+export function ProductPicker (
+    {
+        index,
+        products,
+        value,
+        amount,
+        onProductChange,
+        onProductAdd,
+        onProductRemove,
+        onAmountChange
+    }: ProductPickerProps) {
     return (
         <div className={"product-picker"}>
             <Select
@@ -25,7 +37,8 @@ export function ProductPicker ({index, products, value, onProductChange, onProdu
             </Select>
             <TextField
                 type={"number"}
-                value={1}
+                onChange={(e) => onAmountChange(index, e.target.value)}
+                value={amount}
             />
             <Button onClick={() => onProductAdd()}>
                 <Add />
