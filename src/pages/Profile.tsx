@@ -17,6 +17,7 @@ import {
     fetchCurrentUser,
     updateUser
 } from "../store/auth/authSlice";
+import {UPLOADS_PATH} from "../constants";
 
 export function Profile(){
 
@@ -37,6 +38,11 @@ export function Profile(){
             <h1>Your Deliverix profile</h1>
             <h2>View or edit your personal data.</h2>
             <div className={"profile-container"}>
+                <img
+                    className={"usercard-image-update"}
+                    alt={"image"}
+                    src={UPLOADS_PATH + userForUpdate.profilePictureUrl}>
+                </img>
                 <TextField
                     value={userForUpdate.username}
                     className={"register-input"}

@@ -9,6 +9,7 @@ export interface RegisterState {
 }
 
 export interface UpdateUserState {
+    profilePictureUrl: string,
     email: string,
     password: string,
     passwordConfirmation: string,
@@ -40,6 +41,7 @@ export const initialState: AuthInitialState = {
         password: ""
     },
     updateUser: {
+        profilePictureUrl: "",
         email: "",
         password: "",
         passwordConfirmation: "",

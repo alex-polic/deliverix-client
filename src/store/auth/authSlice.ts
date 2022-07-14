@@ -46,11 +46,14 @@ export const authSlice = createSlice({
         builder.addCase(fetchCurrentUser.fulfilled, (state, action) => {
             state.currentUser = action.payload
         })
+        builder.addCase(updateUser.fulfilled, () => {
+            alert("User updated");
+        })
     }
 })
 
 export const fetchUserForUpdate = createAsyncThunk(
-    "user/update",
+    "user/getById",
     async (id: number) => {
         return await apiClient.getUserById(id);
     });
