@@ -28,11 +28,13 @@ export function LoginPage(){
                     className={"login-input"}
                     label="Email"
                     onChange={(e) => setEmail(e.target.value)}
+                    type={"email"}
                 />
                 <TextField
                     className={"login-input"}
                     label="Password"
                     onChange={(e) => setPassword(e.target.value)}
+                    type={"password"}
                 />
 
                 <Button

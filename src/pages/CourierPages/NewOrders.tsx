@@ -36,7 +36,6 @@ export function NewOrders() {
           {
 
               orders.map((order: OrderWithBuyerAndCourierAndOrderedProductsDTO) => {
-                  console.log(orders);
               return (
                   <div key={order.id} className={"deliver-order"}>
                       <OrderCard

@@ -9,7 +9,7 @@ export const login = async (email: string, password: string) => {
 }
 
 export const register = async (formData: FormData) => {
-    await apiClient.register(formData);
+    return await apiClient.register(formData);
 }
 
 export const logout = () => {

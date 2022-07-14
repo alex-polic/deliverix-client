@@ -10,8 +10,6 @@ const ProtectedRoute = ({
     const isLoggedIn = !!localStorage.getItem("token");
     const currentUser = useAppSelector(currentUserSelector);
 
-    console.log(currentUser)
-
     if (!isLoggedIn) {
         return <Navigate to={redirectPath} replace={true}/>
     }

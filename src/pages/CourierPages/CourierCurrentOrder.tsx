@@ -24,12 +24,12 @@ const CourierCurrentOrder = () => {
         }
 
         const interval = setInterval(() => {
-
-            setTimeRemaining(DateTime
-                .fromISO(currentOrder.deliveryDateTime)
-                .diff(DateTime.fromJSDate(new Date()),"seconds")
-                .seconds
-            );
+            if(currentOrder && currentOrder.deliveryDateTime)
+                setTimeRemaining(DateTime
+                    .fromISO(currentOrder.deliveryDateTime)
+                    .diff(DateTime.fromJSDate(new Date()),"seconds")
+                    .seconds
+                );
         },1000);
 
         return () => clearInterval(interval)
@@ -44,7 +44,7 @@ const CourierCurrentOrder = () => {
                     <CurrentOrderCard order={currentOrder} timeRemaining={timeRemaining}/>
                 </>
             }
-            {!currentOrder || currentOrder.deliveryStatus === DeliveryStatus.Delivered &&
+            {(currentOrder === null || currentOrder.deliveryStatus === DeliveryStatus.Delivered) &&
                 <h1>You don't have any orders being delivered. All of your orders are delivered</h1>
             }
         </Layout>

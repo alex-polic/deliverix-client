@@ -18,7 +18,7 @@ export const login = async (payload: LoginDTO) : Promise<string> => {
 }
 
 export const register = async (payload: FormData) => {
-    await axiosInstance().post("/auth/register", payload);
+    return await axiosInstance().post("/auth/register", payload);
 }
 
 export const getUserById = async (id: number) : Promise<UserDTO> => {

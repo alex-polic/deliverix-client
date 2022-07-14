@@ -33,7 +33,6 @@ export function NewOrderForm() {
     }
 
     const onProductAdd = () => {
-        console.log(createOrderState)
         const newOrderedProducts = [...orderedProducts, {
             productId: 1,
             amount: 1,

@@ -5,8 +5,11 @@ import {useState} from "react";
 import {DateTime} from "luxon";
 
 import * as authService from "../services/authService";
+import {useNavigate} from "react-router-dom";
 
 export function RegisterPage(){
+    const navigate = useNavigate();
+
     const [profilePicture, setProfilePicture] = useState<File>();
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -31,7 +34,10 @@ export function RegisterPage(){
         if(profilePicture)
             formData.append("profilePicture", profilePicture as File);
 
-        await authService.register(formData);
+        const response = await authService.register(formData);
+
+        if(response != undefined)
+            navigate("/login");
     }
 
     // @ts-ignore
@@ -52,13 +58,39 @@ export function RegisterPage(){
                         hidden
                     />
                 </Button>
-                <TextField className={"register-input"} label="Username" onChange={(e) => setUsername(e.target.value)} />
-                <TextField className={"register-input"} label="Email" onChange={(e) => setEmail(e.target.value)}/>
-                <TextField className={"register-input"} label="Password" onChange={(e) => setPassword(e.target.value)}/>
-                <TextField className={"register-input"} label="Confirm Password" onChange={(e) => setPasswordConfirmation(e.target.value)}/>
+                <TextField
+                    className={"register-input"}
+                    label="Username"
+                    onChange={(e) => setUsername(e.target.value)}
+                    type={"username"}
+                />
+                <TextField
+                    className={"register-input"}
+                    label="Email"
+                    onChange={(e) => setEmail(e.target.value)}
+                    type={"email"}
+                />
+                <TextField
+                    className={"register-input"}
+                    label="Password"
+                    onChange={(e) => setPassword(e.target.value)}
+                    type={"password"}
+                />
+                <TextField
+                    className={"register-input"}
+                    label="Confirm Password"
+                    onChange={(e) => setPasswordConfirmation(e.target.value)}
+                    type={"password"}
+                />
                 <hr/>
-                <TextField className={"register-input"} label="Full Name" onChange={(e) => setFullName(e.target.value)}/>
-                <TextField className={"register-input"} label="Address" onChange={(e) => setAddress(e.target.value)}/>
+                <TextField
+                    className={"register-input"}
+                    label="Full Name"
+                    onChange={(e) => setFullName(e.target.value)}/>
+                <TextField
+                    className={"register-input"}
+                    label="Address"
+                    onChange={(e) => setAddress(e.target.value)}/>
                 <TextField
                     className={"register-input"}
                     id="date"
@@ -77,19 +109,13 @@ export function RegisterPage(){
                     onChange={(e, value) => setUserType(value)}
                     exclusive
                 >
-                    <ToggleButton
-                        value="0"
-                    >
+                    <ToggleButton value="0">
                         User
                     </ToggleButton>
-                    <ToggleButton
-                        value="1"
-                    >
+                    <ToggleButton value="1">
                         Courier
                     </ToggleButton>
-                    <ToggleButton
-                        value="2"
-                    >
+                    <ToggleButton value="2">
                         Admin
                     </ToggleButton>
                 </ToggleButtonGroup>
