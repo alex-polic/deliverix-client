@@ -113,7 +113,7 @@ export function RegisterPage(){
                         User
                     </ToggleButton>
                     <ToggleButton value="1">
-                        Courier
+                        Seller
                     </ToggleButton>
                     <ToggleButton value="2">
                         Admin

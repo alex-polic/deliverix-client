@@ -1,6 +1,6 @@
 enum UserType {
     Buyer = "Buyer",
-    Courier = "Courier",
+    Seller = "Seller",
     Admin = "Administrator"
 }
 

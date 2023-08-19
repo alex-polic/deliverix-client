@@ -6,8 +6,8 @@ import ProductDTO from "../dtos/models/ProductDTO";
 import {CreateProductState} from "../store/products/productsSliceTypes";
 import OrderDTO from "../dtos/models/OrderDTO";
 import {CreateOrderState} from "../store/orders/ordersSliceTypes";
-import OrderWithBuyerAndCourierAndOrderedProductsDTO
-    from "../dtos/custom/OrderWithBuyerAndCourierAndOrderedProductsDTO";
+import OrderWithBuyerAndSellerAndOrderedProductsDTO
+    from "../dtos/custom/OrderWithBuyerAndSellerAndOrderedProductsDTO";
 import {store} from "../store/store";
 import {logout} from "../store/auth/authSlice";
 
@@ -39,20 +39,20 @@ export const updateUser = async (data: UpdateUserState) : Promise<UserDTO> => {
     return response.data;
 }
 
-export const getAllCouriers = async () : Promise<UserDTO[]> => {
-    const response = await axiosInstance().get(`/user/getAllCouriers`);
+export const getAllSellers = async () : Promise<UserDTO[]> => {
+    const response = await axiosInstance().get(`/user/getAllSellers`);
 
     return response.data;
 }
 
-export const approveVerification = async (courierId: number) : Promise<UserDTO> => {
-    const response = await axiosInstance().post(`/user/approveVerification`, {courierId});
+export const approveVerification = async (sellerId: number) : Promise<UserDTO> => {
+    const response = await axiosInstance().post(`/user/approveVerification`, {sellerId});
 
     return response.data;
 }
 
-export const rejectVerification = async (courierId: number) : Promise<UserDTO> => {
-    const response = await axiosInstance().post(`/user/rejectVerification`, {courierId});
+export const rejectVerification = async (sellerId: number) : Promise<UserDTO> => {
+    const response = await axiosInstance().post(`/user/rejectVerification`, {sellerId});
 
     return response.data;
 }
@@ -86,66 +86,66 @@ export const deleteProduct = async (id: number) : Promise<ProductDTO> => {
 // Orders
 
 export const getCurrentForBuyerWithOrderedProducts = async ()
-    : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO> => {
+    : Promise<OrderWithBuyerAndSellerAndOrderedProductsDTO> => {
 
     const response = await axiosInstance().get(`/order/getCurrentForBuyerWithOrderedProducts`);
 
     return response.data;
 }
 
-export const getCurrentForCourierWithOrderedProducts = async ()
-    : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO> => {
+export const getCurrentForSellerWithOrderedProducts = async ()
+    : Promise<OrderWithBuyerAndSellerAndOrderedProductsDTO> => {
 
-    const response = await axiosInstance().get(`/order/getCurrentForCourierWithOrderedProducts`);
+    const response = await axiosInstance().get(`/order/getCurrentForSellerWithOrderedProducts`);
 
     return response.data;
 }
 
-export const getAllOrders = async () : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO[]> => {
+export const getAllOrders = async () : Promise<OrderWithBuyerAndSellerAndOrderedProductsDTO[]> => {
     const response = await axiosInstance().get(`/order/getAll`);
 
     return response.data;
 }
 
-export const getAllPastOrdersForBuyer = async (buyerId: number) : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO[]> => {
+export const getAllPastOrdersForBuyer = async (buyerId: number) : Promise<OrderWithBuyerAndSellerAndOrderedProductsDTO[]> => {
     const response = await axiosInstance().get(`/order/getAllPastForBuyer?${getUrlParams({buyerId})}`);
 
     return response.data;
 }
 
-export const getAllPastOrdersForCourier = async (courierId: number) : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO[]> => {
-    const response = await axiosInstance().get(`/order/getAllPastForCourier?${getUrlParams({courierId})}`);
+export const getAllPastOrdersForSeller = async (sellerId: number) : Promise<OrderWithBuyerAndSellerAndOrderedProductsDTO[]> => {
+    const response = await axiosInstance().get(`/order/getAllPastForSeller?${getUrlParams({sellerId})}`);
 
     return response.data;
 }
 
-export const getAllPendingOrders = async () : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO[]> => {
+export const getAllPendingOrders = async () : Promise<OrderWithBuyerAndSellerAndOrderedProductsDTO[]> => {
     const response = await axiosInstance().get(`/order/getAllPendingOrders`);
 
     return response.data;
 }
 
-export const acceptDeliveryOfOrder = async (orderId: number) : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO> => {
+export const acceptDeliveryOfOrder = async (orderId: number) : Promise<OrderWithBuyerAndSellerAndOrderedProductsDTO> => {
     const response = await axiosInstance().post(`/order/acceptDeliveryOfOrder?${getUrlParams({orderId})}`);
 
     return response.data;
 }
 
-export const finishDeliveryOfOrder = async (orderId: number) : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO> => {
+export const finishDeliveryOfOrder = async (orderId: number) : Promise<OrderWithBuyerAndSellerAndOrderedProductsDTO> => {
     const response = await axiosInstance().post(`/order/finishDeliveryOfOrder?${getUrlParams({orderId})}`);
 
     return response.data;
 }
 
 export const createOrderWithOrderedProducts = async (order: CreateOrderState)
-    : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO> => {
+    : Promise<OrderWithBuyerAndSellerAndOrderedProductsDTO> => {
     const response = await axiosInstance().post(`/order/createWithOrderedProducts`, order);
 
     return response.data;
 }
 
 export const updateOrder = async (order: OrderDTO)
-    : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO> => {
+    : Promise<OrderWithBuyerAndSellerAndOrderedProductsDTO> => {
     const response = await axiosInstance().patch(`/order/update`, order);
 
     return response.data;
