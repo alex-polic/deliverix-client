@@ -1,6 +1,6 @@
 import {Layout} from "../../components/Layout";
-import OrderWithBuyerAndCourierAndOrderedProductsDTO
-    from "../../dtos/custom/OrderWithBuyerAndCourierAndOrderedProductsDTO";
+import OrderWithBuyerAndSellerAndOrderedProductsDTO
+    from "../../dtos/custom/OrderWithBuyerAndSellerAndOrderedProductsDTO";
 import {OrderCard} from "../../components/OrderCard";
 import {useAppDispatch, useAppSelector} from "../../store/hooks";
 import {
@@ -35,13 +35,13 @@ export function NewOrders() {
           <div className={"neworders-container"}>
           {
 
-              orders.map((order: OrderWithBuyerAndCourierAndOrderedProductsDTO) => {
+              orders.map((order: OrderWithBuyerAndSellerAndOrderedProductsDTO) => {
               return (
                   <div key={order.id} className={"deliver-order"}>
                       <OrderCard
                           id={order.id}
                           buyerFullName={order.buyer?.fullName}
-                          courierFullName={order.courier?.fullName}
+                          sellerFullName={order.seller?.fullName}
                           deliveryAddress={order.deliveryAddress}
                           comment={order.comment}
                           fullPrice={order.fullPrice}

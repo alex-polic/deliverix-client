@@ -9,7 +9,7 @@ const Verification = () => {
             </h1>
             <h2>
                 Once our admin team verifies your profile, you will be able
-                to access Deliverix platform!
+                to access Sellers platform!
             </h2>
         </Layout>
     );

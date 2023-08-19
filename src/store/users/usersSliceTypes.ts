@@ -1,6 +1,6 @@
 import VerificationStatus from "../../dtos/enums/verificationStatus";
 
-export interface CouriersState {
+export interface SellersState {
     id: number,
     profilePictureUrl: string,
     fullName: string,
@@ -11,11 +11,11 @@ export interface CouriersState {
 }
 
 export interface UsersSliceState {
-    couriers: CouriersState[],
-    areCouriersLoaded: boolean
+    sellers: SellersState[],
+    areSellersLoaded: boolean
 }
 
 export const initialState: UsersSliceState  = {
-    couriers: [],
-    areCouriersLoaded: false,
+    sellers: [],
+    areSellersLoaded: false,
 }

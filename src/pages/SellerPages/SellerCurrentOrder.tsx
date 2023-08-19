@@ -3,14 +3,14 @@ import {Layout} from "../../components/Layout";
 import {useAppDispatch, useAppSelector} from "../../store/hooks";
 import {
     currentOrderSelector,
-    getCurrentForCourierWithOrderedProducts,
+    getCurrentForSellerWithOrderedProducts,
     isCurrentOrderLoadedSelector
 } from "../../store/orders/ordersSlice";
 import {CurrentOrderCard} from "../../components/CurrentOrderCard";
 import {DateTime} from "luxon";
 import DeliveryStatus from "../../dtos/enums/deliveryStatus";
 
-const CourierCurrentOrder = () => {
+const SellerCurrentOrder = () => {
     const dispatch = useAppDispatch();
     const currentOrder = useAppSelector(currentOrderSelector);
     const isCurrentOrderLoaded = useAppSelector(isCurrentOrderLoadedSelector);
@@ -19,7 +19,7 @@ const CourierCurrentOrder = () => {
 
     useEffect(() => {
         if(currentOrder && currentOrder.id === 0 && !isCurrentOrderLoaded){
-            dispatch(getCurrentForCourierWithOrderedProducts());
+            dispatch(getCurrentForSellerWithOrderedProducts());
             return;
         }
 
@@ -51,4 +51,4 @@ const CourierCurrentOrder = () => {
     );
 };
 
-export default CourierCurrentOrder;
+export default SellerCurrentOrder;

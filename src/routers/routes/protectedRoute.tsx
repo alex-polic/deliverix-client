@@ -16,10 +16,10 @@ const ProtectedRoute = ({
 
     if (currentUser &&
         currentUser.id > 0
-        && currentUser.role === "Courier"
+        && currentUser.role === "Seller"
         && currentUser.verificationStatus != "Approved"
     ) {
-        return <Navigate to={"/courier/verification"} replace={true}/>
+        return <Navigate to={"/seller/verification"} replace={true}/>
     }
 
     return children;
