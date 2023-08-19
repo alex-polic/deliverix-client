@@ -90,6 +90,12 @@ export function Dashboard(){
                             pageTitle={"Current Order"}
                             pageIcon={<Receipt />}
                         />
+
+                        <PageCard
+                            href={"/admin/products"}
+                            pageTitle={"Products"}
+                            pageIcon={<Fastfood />}
+                        />
                     </>
                 }
 
