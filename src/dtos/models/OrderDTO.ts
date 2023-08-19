@@ -4,7 +4,7 @@ export default interface OrderDTO {
     id: number,
 
     buyerId: number,
-    sellerId: number,
+    courierId: number,
     deliveryAddress: string,
     comment: string,
     fullPrice: number,

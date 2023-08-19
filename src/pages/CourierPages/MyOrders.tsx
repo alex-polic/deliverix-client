@@ -3,12 +3,12 @@ import {Layout} from "../../components/Layout";
 import {useAppDispatch, useAppSelector} from "../../store/hooks";
 import {
     areOrdersLoadedSelector,
-    fetchPastOrdersForSeller,
+    fetchPastOrdersForCourier,
     ordersSelector
 } from "../../store/orders/ordersSlice";
 import {currentUserSelector, fetchCurrentUser} from "../../store/auth/authSlice";
-import OrderWithBuyerAndSellerAndOrderedProductsDTO
-    from "../../dtos/custom/OrderWithBuyerAndSellerAndOrderedProductsDTO";
+import OrderWithBuyerAndCourierAndOrderedProductsDTO
+    from "../../dtos/custom/OrderWithBuyerAndCourierAndOrderedProductsDTO";
 import {OrderCard} from "../../components/OrderCard";
 
 const MyOrders = () => {
@@ -24,19 +24,19 @@ const MyOrders = () => {
         }
         if (areOrdersLoaded) return;
 
-        dispatch(fetchPastOrdersForSeller(userData.id));
+        dispatch(fetchPastOrdersForCourier(userData.id));
     }, [userData])
 
     return (
         <Layout title={"My Orders"}>
             <h1>View all your completed orders in the platform!</h1>
-            {orders.map((order: OrderWithBuyerAndSellerAndOrderedProductsDTO) => {
+            {orders.map((order: OrderWithBuyerAndCourierAndOrderedProductsDTO) => {
                 return (
                     <OrderCard
                         key={order.id}
                         id={order.id}
                         buyerFullName={order.buyer?.fullName}
-                        sellerFullName={order.seller?.fullName}
+                        courierFullName={order.courier?.fullName}
                         deliveryAddress={order.deliveryAddress}
                         comment={order.comment}
                         fullPrice={order.fullPrice}

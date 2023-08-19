@@ -1,13 +1,13 @@
 import * as apiClient from "../clients/apiClient"
 
-export async function getAllSellers() {
-    return await apiClient.getAllSellers();
+export async function getAllCouriers() {
+    return await apiClient.getAllCouriers();
 }
 
-export async function approveVerification(sellerId: number) {
-    return await apiClient.approveVerification(sellerId);
+export async function approveVerification(courierId: number) {
+    return await apiClient.approveVerification(courierId);
 }
 
-export async function rejectVerification(sellerId: number) {
-    return await apiClient.rejectVerification(sellerId);
+export async function rejectVerification(courierId: number) {
+    return await apiClient.rejectVerification(courierId);
 }

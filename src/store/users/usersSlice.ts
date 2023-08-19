@@ -9,49 +9,49 @@ export const usersSlice = createSlice({
     reducers: {
     },
     extraReducers: builder =>  {
-        builder.addCase(fetchSellers.fulfilled, (state, action) => {
-            state.sellers = action.payload;
-            state.areSellersLoaded = true;
+        builder.addCase(fetchCouriers.fulfilled, (state, action) => {
+            state.couriers = action.payload;
+            state.areCouriersLoaded = true;
         })
         builder.addCase(approveVerification.fulfilled, (state, action) => {
-            let index = state.sellers.findIndex(e => e.id === action.payload.id);
+            let index = state.couriers.findIndex(e => e.id === action.payload.id);
 
-            let newArray = [...state.sellers];
+            let newArray = [...state.couriers];
             newArray[index] = action.payload;
 
-            state.sellers = [...newArray];
+            state.couriers = [...newArray];
         })
         builder.addCase(rejectVerification.fulfilled, (state, action) => {
-            let index = state.sellers.findIndex(e => e.id === action.payload.id);
+            let index = state.couriers.findIndex(e => e.id === action.payload.id);
 
-            let newArray = [...state.sellers];
+            let newArray = [...state.couriers];
             newArray[index] = action.payload;
 
-            state.sellers = [...newArray];
+            state.couriers = [...newArray];
         })
     }
 });
 
-export const fetchSellers = createAsyncThunk(
-    "user/getAllSellers",
+export const fetchCouriers = createAsyncThunk(
+    "user/getAllCouriers",
     async () => {
-        return await usersService.getAllSellers();
+        return await usersService.getAllCouriers();
     });
 
 export const approveVerification = createAsyncThunk(
     "user/approveVerification",
-    async (sellerId: number) => {
-        return await usersService.approveVerification(sellerId);
+    async (courierId: number) => {
+        return await usersService.approveVerification(courierId);
     });
 
 export const rejectVerification = createAsyncThunk(
     "user/rejectVerification",
-    async (sellerId: number) => {
-        return await usersService.rejectVerification(sellerId);
+    async (courierId: number) => {
+        return await usersService.rejectVerification(courierId);
     });
 
-export const sellersSelector = (state: any) => state.users.sellers;
-export const areSellersLoadedSelector = (state: any) => state.users.areSellersLoaded;
+export const couriersSelector = (state: any) => state.users.couriers;
+export const areCouriersLoadedSelector = (state: any) => state.users.areCouriersLoaded;
 
 export const {
 } = usersSlice.actions

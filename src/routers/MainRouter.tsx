@@ -9,10 +9,10 @@ import {AllOrders} from "../pages/AdminPages/AllOrders";
 import {Products} from "../pages/AdminPages/Products";
 import {BuyerOrder} from "../pages/BuyerPages/BuyerOrder";
 import {BuyerPastOrders} from "../pages/BuyerPages/BuyerPastOrders";
-import MyOrders from "../pages/SellerPages/MyOrders";
-import {NewOrders} from "../pages/SellerPages/NewOrders";
-import SellerCurrentOrder from "../pages/SellerPages/SellerCurrentOrder";
-import Verification from "../pages/SellerPages/Verification";
+import MyOrders from "../pages/CourierPages/MyOrders";
+import {NewOrders} from "../pages/CourierPages/NewOrders";
+import CourierCurrentOrder from "../pages/CourierPages/CourierCurrentOrder";
+import Verification from "../pages/CourierPages/Verification";
 
 export function MainRouter() {
     return(
@@ -57,23 +57,23 @@ export function MainRouter() {
                 </ProtectedRoute>}>
             </Route>
 
-            <Route path="/seller/myOrders" element={
+            <Route path="/courier/myOrders" element={
                 <ProtectedRoute>
                     < MyOrders />
                 </ProtectedRoute>}>
             </Route>
-            <Route path="/seller/newOrder" element={
+            <Route path="/courier/newOrder" element={
                 <ProtectedRoute>
                     < NewOrders />
                 </ProtectedRoute>}>
             </Route>
-            <Route path="/seller/currentOrder" element={
+            <Route path="/courier/currentOrder" element={
                 <ProtectedRoute>
-                    < SellerCurrentOrder />
+                    < CourierCurrentOrder />
                 </ProtectedRoute>}>
             </Route>
 
-            <Route path="/seller/verification" element={
+            <Route path="/courier/verification" element={
                 <Verification/>
             }>
             </Route>

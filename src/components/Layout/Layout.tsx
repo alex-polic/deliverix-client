@@ -6,7 +6,7 @@ interface ILayoutProps {
     children?: any
 }
 
-export function Layout({title = "Sellers App", children}: ILayoutProps) {
+export function Layout({title = "Deliverix", children}: ILayoutProps) {
     return(
         <>
             <Header title={title}/>

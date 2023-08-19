@@ -2,51 +2,51 @@ import OrderDTO from "../dtos/models/OrderDTO";
 
 import * as apiClient from "../clients/apiClient";
 import {CreateOrderState} from "../store/orders/ordersSliceTypes";
-import OrderWithBuyerAndSellerAndOrderedProductsDTO
-    from "../dtos/custom/OrderWithBuyerAndSellerAndOrderedProductsDTO";
+import OrderWithBuyerAndCourierAndOrderedProductsDTO
+    from "../dtos/custom/OrderWithBuyerAndCourierAndOrderedProductsDTO";
 
 export async function getCurrentForBuyerWithOrderedProducts()
-    : Promise<OrderWithBuyerAndSellerAndOrderedProductsDTO> {
+    : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO> {
     return await apiClient.getCurrentForBuyerWithOrderedProducts();
 }
 
-export async function getCurrentForSellerWithOrderedProducts()
-    : Promise<OrderWithBuyerAndSellerAndOrderedProductsDTO> {
-    return await apiClient.getCurrentForSellerWithOrderedProducts();
+export async function getCurrentForCourierWithOrderedProducts()
+    : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO> {
+    return await apiClient.getCurrentForCourierWithOrderedProducts();
 }
 
 export async function getAllOrders()
-    : Promise<OrderWithBuyerAndSellerAndOrderedProductsDTO[]> {
+    : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO[]> {
 
     return await apiClient.getAllOrders();
 }
 
 export async function getAllPastOrdersForBuyer(buyerId: number)
-    : Promise<OrderWithBuyerAndSellerAndOrderedProductsDTO[]> {
+    : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO[]> {
 
     return await apiClient.getAllPastOrdersForBuyer(buyerId);
 }
 
-export async function getAllPastOrdersForSeller(sellerId: number)
-    : Promise<OrderWithBuyerAndSellerAndOrderedProductsDTO[]> {
+export async function getAllPastOrdersForCourier(courierId: number)
+    : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO[]> {
 
-    return await apiClient.getAllPastOrdersForSeller(sellerId);
+    return await apiClient.getAllPastOrdersForCourier(courierId);
 }
 
 export async function getAllPendingOrders()
-    : Promise<OrderWithBuyerAndSellerAndOrderedProductsDTO[]> {
+    : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO[]> {
 
     return await apiClient.getAllPendingOrders();
 }
 
 export async function acceptDeliveryOfOrder(orderId: number)
-    : Promise<OrderWithBuyerAndSellerAndOrderedProductsDTO> {
+    : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO> {
 
     return await apiClient.acceptDeliveryOfOrder(orderId);
 }
 
 export async function finishDeliveryOfOrder(orderId: number)
-    : Promise<OrderWithBuyerAndSellerAndOrderedProductsDTO> {
+    : Promise<OrderWithBuyerAndCourierAndOrderedProductsDTO> {
 
     return await apiClient.finishDeliveryOfOrder(orderId);
 }

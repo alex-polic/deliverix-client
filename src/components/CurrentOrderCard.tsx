@@ -1,12 +1,12 @@
-import OrderWithBuyerAndSellerAndOrderedProductsDTO
-    from "../dtos/custom/OrderWithBuyerAndSellerAndOrderedProductsDTO";
+import OrderWithBuyerAndCourierAndOrderedProductsDTO
+    from "../dtos/custom/OrderWithBuyerAndCourierAndOrderedProductsDTO";
 import {Receipt} from "@mui/icons-material";
 import DeliveryStatus from "../dtos/enums/deliveryStatus";
 import {useAppDispatch} from "../store/hooks";
 import {finishDeliveryOfOrder} from "../store/orders/ordersSlice";
 
 interface CurrentOrderCardProps {
-    order: OrderWithBuyerAndSellerAndOrderedProductsDTO,
+    order: OrderWithBuyerAndCourierAndOrderedProductsDTO,
     timeRemaining: number
 }
 

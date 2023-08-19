@@ -1,5 +1,5 @@
-import OrderWithBuyerAndSellerAndOrderedProductsDTO
-    from "../../dtos/custom/OrderWithBuyerAndSellerAndOrderedProductsDTO";
+import OrderWithBuyerAndCourierAndOrderedProductsDTO
+    from "../../dtos/custom/OrderWithBuyerAndCourierAndOrderedProductsDTO";
 import UserType from "../../dtos/enums/userType";
 
 export interface CreateOrderedProductState {
@@ -16,9 +16,9 @@ export interface CreateOrderState {
 }
 
 export interface OrdersSliceState {
-    orders: OrderWithBuyerAndSellerAndOrderedProductsDTO[],
+    orders: OrderWithBuyerAndCourierAndOrderedProductsDTO[],
     createOrder: CreateOrderState,
-    currentOrder: OrderWithBuyerAndSellerAndOrderedProductsDTO,
+    currentOrder: OrderWithBuyerAndCourierAndOrderedProductsDTO,
     areOrdersLoaded: boolean,
     isCurrentOrderLoaded: boolean
 }
@@ -48,7 +48,7 @@ export const initialState : OrdersSliceState = {
             createdAt: "",
             updatedAt: ""
         },
-        seller: {
+        courier: {
             id: 0,
             profilePictureUrl: "",
             fullName: "",
@@ -58,7 +58,7 @@ export const initialState : OrdersSliceState = {
             verificationStatus: 0,
             password: "",
             address: "",
-            userType: UserType.Seller,
+            userType: UserType.Courier,
             createdAt: "",
             updatedAt: ""
         },

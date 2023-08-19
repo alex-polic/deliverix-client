@@ -1,10 +1,10 @@
 import UserDTO from "../models/UserDTO";
 
-export default interface OrderWithBuyerAndSellerDTO {
+export default interface OrderWithBuyerAndCourierDTO {
     id: number,
 
     buyer: UserDTO,
-    seller: UserDTO,
+    courier: UserDTO,
     deliveryAddress: string,
     comment: string,
     fullPrice: number,

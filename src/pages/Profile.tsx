@@ -35,7 +35,7 @@ export function Profile(){
 
     return(
         <Layout title={"Profile"}>
-            <h1>Your Seller App profile</h1>
+            <h1>Your Deliverix profile</h1>
             <h2>View or edit your personal data.</h2>
             <div className={"profile-container"}>
                 <img

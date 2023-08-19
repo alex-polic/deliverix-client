@@ -8,8 +8,8 @@ import {
 } from "../../store/orders/ordersSlice";
 import {useEffect} from "react";
 import {currentUserSelector, fetchCurrentUser} from "../../store/auth/authSlice";
-import OrderWithBuyerAndSellerAndOrderedProductsDTO
-    from "../../dtos/custom/OrderWithBuyerAndSellerAndOrderedProductsDTO";
+import OrderWithBuyerAndCourierAndOrderedProductsDTO
+    from "../../dtos/custom/OrderWithBuyerAndCourierAndOrderedProductsDTO";
 
 
 export function BuyerPastOrders() {
@@ -32,13 +32,13 @@ export function BuyerPastOrders() {
     return(
       <Layout title={"Past Orders"}>
           <h1>View all orders in the platform!</h1>
-          {orders.map((order: OrderWithBuyerAndSellerAndOrderedProductsDTO) => {
+          {orders.map((order: OrderWithBuyerAndCourierAndOrderedProductsDTO) => {
               return (
                   <OrderCard
                       key={order.id}
                       id={order.id}
                       buyerFullName={order.buyer?.fullName}
-                      sellerFullName={order.seller?.fullName}
+                      courierFullName={order.courier?.fullName}
                       deliveryAddress={order.deliveryAddress}
                       comment={order.comment}
                       fullPrice={order.fullPrice}

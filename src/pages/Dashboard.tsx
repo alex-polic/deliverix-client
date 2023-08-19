@@ -27,8 +27,8 @@ export function Dashboard(){
 
     return(
         <Layout>
-            <h1>Welcome to Sellers!</h1>
-            <h2>Sellers is your go-to delivery service.</h2>
+            <h1>Welcome to Deliverix!</h1>
+            <h2>Deliverix is your go-to delivery service.</h2>
             <div className={"dashboard-container"}>
                 <PageCard
                     href={"/profile"}
@@ -71,22 +71,22 @@ export function Dashboard(){
                         />
                     </>
                 }
-                {currentUserData.role === UserType.Seller &&
+                {currentUserData.role === UserType.Courier &&
                     <>
                         <PageCard
-                            href={"/seller/newOrder"}
+                            href={"/courier/newOrder"}
                             pageTitle={"New Orders"}
                             pageIcon={<AssignmentLate />}
                         />
 
                         <PageCard
-                            href={"/seller/myOrders"}
+                            href={"/courier/myOrders"}
                             pageTitle={"My Orders"}
                             pageIcon={<AssignmentTurnedIn />}
                         />
 
                         <PageCard
-                            href={"/seller/currentOrder"}
+                            href={"/courier/currentOrder"}
                             pageTitle={"Current Order"}
                             pageIcon={<Receipt />}
                         />
